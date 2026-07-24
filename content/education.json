@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "degree": "MSc Artificial Intelligence",
+      "institution": "University of Engineering & Technology (UET)",
+      "duration": "2025 — 2027",
+      "detail": "CGPA 3.57 · Research: Failure Modes & Recovery in LLM Tool-Calling Pipelines"
+    },
+    {
+      "degree": "BS Software Engineering",
+      "institution": "PUCIT, University of the Punjab",
+      "duration": "2016 — 2020",
+      "detail": "CGPA 2.72 · Final Year Project: Intelligent Home Automation System"
+    },
+    {
+      "degree": "FSc Pre-Engineering",
+      "institution": "Punjab College of Science",
+      "duration": "2014 — 2016",
+      "detail": "83% marks"
+    },
+    {
+      "degree": "Matriculation (Science)",
+      "institution": "WAPDA Girls High School",
+      "duration": "2012 — 2014",
+      "detail": "86% marks"
+    }
+  ]
+}

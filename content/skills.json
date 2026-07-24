@@ -1,0 +1,51 @@
+{
+  "categories": [
+    {
+      "name": "Frontend",
+      "skills": [
+        { "name": "Angular", "level": 92 },
+        { "name": "TypeScript", "level": 90 },
+        { "name": "JavaScript (ES6+)", "level": 92 },
+        { "name": "Blazor", "level": 85 },
+        { "name": "HTML5", "level": 95 },
+        { "name": "CSS3", "level": 90 },
+        { "name": "Bootstrap", "level": 88 },
+        { "name": "SignalR", "level": 80 }
+      ]
+    },
+    {
+      "name": "Backend",
+      "skills": [
+        { "name": "C#", "level": 93 },
+        { "name": ".NET Core / .NET 5+", "level": 93 },
+        { "name": "ASP.NET Web API", "level": 92 },
+        { "name": "ASP.NET MVC", "level": 90 },
+        { "name": "Entity Framework Core", "level": 90 },
+        { "name": "SQL Server (T-SQL)", "level": 90 },
+        { "name": "GraphQL / REST", "level": 85 },
+        { "name": "Microservices", "level": 82 }
+      ]
+    },
+    {
+      "name": "AI & Data",
+      "skills": [
+        { "name": "Python", "level": 85 },
+        { "name": "Machine Learning", "level": 82 },
+        { "name": "LLM Tool-Calling", "level": 82 },
+        { "name": "AI Invoice Extraction", "level": 85 },
+        { "name": "Vector Databases", "level": 78 },
+        { "name": "Query Optimization", "level": 88 }
+      ]
+    },
+    {
+      "name": "DevOps & Cloud",
+      "skills": [
+        { "name": "Git", "level": 92 },
+        { "name": "Docker", "level": 82 },
+        { "name": "CI/CD (Azure DevOps / GitHub Actions)", "level": 85 },
+        { "name": "Azure", "level": 82 },
+        { "name": "AWS", "level": 75 }
+      ]
+    }
+  ]
+}

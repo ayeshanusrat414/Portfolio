@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashmere — Atelier · Ready-to-Wear &amp; Made-to-Measure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bone:#efe9df;        /* warm ivory */
+    --bone-2:#e6dfd2;
+    --ink:#1a1613;         /* warm near-black */
+    --ink-2:#443c34;
+    --stone:#8b8173;       /* muted */
+    --line:#d6cebf;
+    --plum:#7a3f52;        /* refined whisper accent */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Jost",system-ui,sans-serif;font-weight:300;background:var(--bone);color:var(--ink);
+    line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .serif{font-family:"Cormorant Garamond",Georgia,serif;font-weight:400;line-height:1.08}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1280px;margin:0 auto;padding:0 44px}
+  .ey{font-family:"Jost";font-weight:400;text-transform:uppercase;letter-spacing:.42em;font-size:.68rem;color:var(--plum)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .4s,padding .4s}
+  nav.scrolled{background:rgba(239,233,223,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav-in{max-width:1280px;margin:0 auto;padding:26px 44px;display:flex;align-items:center;justify-content:space-between;transition:padding .4s}
+  nav.scrolled .nav-in{padding:16px 44px}
+  .brand{font-family:"Cormorant Garamond";font-weight:500;font-size:1.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cream,#fff);transition:color .4s}
+  nav.scrolled .brand{color:var(--ink)}
+  .nav-links{display:flex;gap:38px;align-items:center}
+  .nav-links a{font-family:"Jost";font-weight:400;text-transform:uppercase;letter-spacing:.2em;font-size:.74rem;color:#fff;opacity:.9;transition:opacity .25s,color .4s}
+  nav.scrolled .nav-links a{color:var(--ink)}
+  .nav-links a:hover{opacity:.6}
+  .nav-links a.appt{border:1px solid rgba(255,255,255,.6);padding:9px 18px;opacity:1}
+  nav.scrolled .nav-links a.appt{border-color:var(--ink)}
+  .nav-toggle{display:none;background:none;border:0;color:#fff;font-size:1.3rem;cursor:pointer}
+  nav.scrolled .nav-toggle{color:var(--ink)}
+
+  /* HERO */
+  header{position:relative;height:100vh;min-height:600px;display:flex;align-items:flex-end;background:#2a2019;
+    background-image:linear-gradient(180deg,rgba(20,15,12,.28),rgba(20,15,12,.05) 30%,rgba(20,15,12,.55));
+    background-size:cover;background-position:center top}
+  .hero-photo{position:absolute;inset:0;background-size:cover;background-position:center 20%;z-index:0}
+  .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,12,.34),rgba(20,15,12,.04) 34%,rgba(20,15,12,.6));z-index:1}
+  .hero-in{position:relative;z-index:2;width:100%;padding:0 44px 84px;color:var(--bone)}
+  .hero-in .ey{color:rgba(239,233,223,.85);display:block;margin-bottom:20px}
+  header h1{font-family:"Cormorant Garamond";font-weight:400;color:var(--bone);font-size:clamp(3rem,8vw,7rem);letter-spacing:.01em;max-width:16ch}
+  header h1 em{font-style:italic;color:#e9d5c2}
+  .hero-in p{max-width:40ch;margin-top:20px;font-size:1.02rem;opacity:.9;font-weight:300}
+
+  /* STATEMENT */
+  .statement{padding:130px 0;text-align:center}
+  .statement .ey{display:block;margin-bottom:26px}
+  .statement p{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(1.7rem,3.6vw,2.9rem);line-height:1.32;max-width:24ch;margin:0 auto;color:var(--ink)}
+  .statement p em{font-style:italic;color:var(--plum)}
+
+  /* LOOKBOOK */
+  .look{padding:20px 0 120px}
+  .look-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:46px;flex-wrap:wrap;gap:20px}
+  .look-head h2{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(2.2rem,4.4vw,3.6rem);letter-spacing:.01em}
+  .look-head .ey{margin-bottom:12px;display:block}
+  .look-head .side{text-align:right;color:var(--stone);font-size:.86rem;max-width:30ch}
+  .looks{display:grid;grid-template-columns:repeat(12,1fr);gap:22px}
+  .lk{position:relative;overflow:hidden;background:var(--bone-2)}
+  .lk .ph{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+  .lk:hover .ph{transform:scale(1.05)}
+  .lk .cap{position:absolute;left:20px;bottom:18px;z-index:2;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.4)}
+  .lk .cap .n{font-family:"Jost";text-transform:uppercase;letter-spacing:.24em;font-size:.66rem;opacity:.9}
+  .lk .cap .t{font-family:"Cormorant Garamond";font-size:1.5rem;font-style:italic;line-height:1}
+  .lk1{grid-column:span 7;aspect-ratio:4/5}
+  .lk2{grid-column:span 5;aspect-ratio:4/5}
+  .lk3{grid-column:span 5;aspect-ratio:3/4}
+  .lk4{grid-column:span 7;aspect-ratio:3/4}
+  .lk1 .ph{background-image:url("https://images.unsplash.com/photo-1513094735237-8f2714d57c13?w=1100&q=80&auto=format&fit=crop")}
+  .lk2 .ph{background-image:url("https://images.unsplash.com/photo-1580478491436-fd6a937acc9e?w=900&q=80&auto=format&fit=crop")}
+  .lk3 .ph{background-image:url("https://images.unsplash.com/photo-1728279900274-706566e3ca08?w=900&q=80&auto=format&fit=crop")}
+  .lk4 .ph{background-image:url("https://images.unsplash.com/photo-1682397125309-56077754235d?w=1100&q=80&auto=format&fit=crop")}
+
+  /* ATELIER */
+  .atelier{background:var(--ink);color:var(--bone)}
+  .atelier-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+  .atelier-img{min-height:560px;background:#2a2019;
+    background-image:url("https://images.unsplash.com/photo-1603189343302-e603f7add05a?w=1100&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center}
+  .atelier-body{padding:100px 70px}
+  .atelier-body .ey{color:#c9a68f;display:block;margin-bottom:22px}
+  .atelier-body h2{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(2rem,3.6vw,3.1rem);margin-bottom:24px;line-height:1.1}
+  .atelier-body p{opacity:.82;margin-bottom:18px;font-weight:300;font-size:1.02rem}
+  .atelier-body .sign{font-family:"Cormorant Garamond";font-style:italic;font-size:1.5rem;color:#e9d5c2;margin-top:26px}
+
+  /* SERVICES */
+  .services{padding:120px 0}
+  .services .ey{text-align:center;display:block;margin-bottom:16px}
+  .services h2{font-family:"Cormorant Garamond";font-weight:400;text-align:center;font-size:clamp(2.2rem,4.4vw,3.4rem);margin-bottom:64px}
+  .svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+  .svc{text-align:center;padding:0 8px}
+  .svc .num{font-family:"Cormorant Garamond";font-style:italic;font-size:1.5rem;color:var(--plum)}
+  .svc h3{font-family:"Cormorant Garamond";font-weight:500;font-size:1.5rem;margin:12px 0 12px;letter-spacing:.02em}
+  .svc p{color:var(--stone);font-size:.94rem;font-weight:300}
+  .svc-div{width:1px;background:var(--line)}
+
+  /* APPOINTMENT */
+  .appt-sec{background:var(--bone-2);padding:120px 0;text-align:center}
+  .appt-sec .ey{display:block;margin-bottom:20px}
+  .appt-sec h2{font-family:"Cormorant Garamond";font-weight:400;font-size:clamp(2.4rem,6vw,4.6rem);line-height:1.04;max-width:16ch;margin:0 auto 22px}
+  .appt-sec h2 em{font-style:italic;color:var(--plum)}
+  .appt-sec p{color:var(--ink-2);max-width:42ch;margin:0 auto 38px;font-weight:300}
+  .btn{display:inline-block;font-family:"Jost";font-weight:400;text-transform:uppercase;letter-spacing:.24em;font-size:.76rem;
+    border:1px solid var(--ink);padding:16px 40px;transition:background .35s,color .35s}
+  .btn:hover{background:var(--ink);color:var(--bone)}
+
+  /* FOOTER */
+  footer{background:var(--ink);color:var(--bone);padding:84px 0 40px}
+  .foot-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:50px;padding-bottom:54px;border-bottom:1px solid rgba(239,233,223,.14)}
+  .foot-brand{font-family:"Cormorant Garamond";font-weight:500;font-size:1.9rem;letter-spacing:.3em;text-transform:uppercase}
+  .foot-grid>div>p{opacity:.72;font-weight:300;font-size:.95rem;margin-top:18px;max-width:34ch}
+  .foot-col h4{font-family:"Jost";font-weight:400;text-transform:uppercase;letter-spacing:.24em;font-size:.68rem;color:#c9a68f;margin-bottom:18px}
+  .foot-col a,.foot-col p{display:block;opacity:.78;font-weight:300;font-size:.95rem;margin-bottom:9px;transition:opacity .25s}
+  .foot-col a:hover{opacity:1}
+  .foot-bottom{padding-top:28px;display:flex;justify-content:space-between;font-family:"Jost";font-weight:300;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;flex-wrap:wrap;gap:10px}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:920px){
+    .nav-in,.foot-grid{padding-left:22px;padding-right:22px}
+    .wrap{padding:0 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:330px;background:var(--ink);flex-direction:column;
+      justify-content:center;gap:30px;transform:translateX(100%);transition:transform .45s ease;z-index:55}
+    .nav-links.open{transform:none}
+    .nav-links a{color:var(--bone)}
+    .nav-toggle{display:block;z-index:60}
+    nav.scrolled .nav-toggle{color:var(--ink)}
+    .hero-in{padding:0 22px 60px}
+    .statement,.services,.appt-sec{padding:80px 0}
+    .looks{grid-template-columns:1fr;gap:16px}
+    .lk1,.lk2,.lk3,.lk4{grid-column:span 1;aspect-ratio:4/5}
+    .atelier-grid{grid-template-columns:1fr}
+    .atelier-img{min-height:360px}
+    .atelier-body{padding:60px 24px}
+    .svc-grid{grid-template-columns:1fr 1fr;gap:44px 20px}
+    .svc-div{display:none}
+    .foot-grid{grid-template-columns:1fr;gap:34px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .lk .ph{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="brand">Ashmere</div>
+    <div class="nav-links" id="navlinks">
+      <a href="#collection">Collection</a>
+      <a href="#atelier">Atelier</a>
+      <a href="#services">Services</a>
+      <a href="#appointment" class="appt">Book appointment</a>
+    </div>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1539533113208-f6df8cc8b543?w=1900&q=80&auto=format&fit=crop')"></div>
+  <div class="hero-shade"></div>
+  <div class="hero-in">
+    <span class="ey">Atelier — Est. 2017</span>
+    <h1>Clothes made<br>to be <em>lived in.</em></h1>
+    <p>Considered ready-to-wear and made-to-measure, cut by hand in small runs — quiet luxury for a real life.</p>
+  </div>
+</header>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap reveal">
+    <span class="ey">The house</span>
+    <p>We design a small wardrobe of pieces you'll reach for again and again — <em>fewer things, made better.</em></p>
+  </div>
+</section>
+
+<!-- LOOKBOOK -->
+<section id="collection" class="look">
+  <div class="wrap">
+    <div class="look-head reveal">
+      <div>
+        <span class="ey">Autumn / Winter</span>
+        <h2>The Collection — <em style="font-style:italic;font-family:'Cormorant Garamond'">Quiet Hours</em></h2>
+      </div>
+      <div class="side">A study in soft tailoring, natural fibres, and a palette drawn from late light. Eighteen looks, made to order.</div>
+    </div>
+    <div class="looks">
+      <div class="lk lk1 reveal"><div class="ph"></div><div class="cap"><div class="n">Look 01</div><div class="t">Daybreak</div></div></div>
+      <div class="lk lk2 reveal"><div class="ph"></div><div class="cap"><div class="n">Look 02</div><div class="t">Midday</div></div></div>
+      <div class="lk lk3 reveal"><div class="ph"></div><div class="cap"><div class="n">Look 03</div><div class="t">Dusk</div></div></div>
+      <div class="lk lk4 reveal"><div class="ph"></div><div class="cap"><div class="n">Look 04</div><div class="t">Nightfall</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ATELIER -->
+<section id="atelier" class="atelier">
+  <div class="atelier-grid">
+    <div class="atelier-img reveal"></div>
+    <div class="atelier-body reveal">
+      <span class="ey">In the atelier</span>
+      <h2>Made by hand, made to last.</h2>
+      <p>Every Ashmere piece begins as a flat pattern on our cutting table and is sewn, start to finish, by a single maker. Nothing is rushed and nothing is mass-produced.</p>
+      <p>We work with deadstock and natural fibres wherever we can, and we keep our runs small on purpose — so each garment gets the attention it deserves, and so little goes to waste.</p>
+      <p>For made-to-measure, we take your measurements in the studio and fit the garment to you across two appointments.</p>
+      <div class="sign">— The Ashmere atelier</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="wrap">
+    <span class="ey">What we offer</span>
+    <h2>Four ways to dress with us</h2>
+    <div class="svc-grid">
+      <div class="svc reveal"><div class="num">i</div><h3>Ready-to-Wear</h3><p>Seasonal collections in limited runs, available to order online or in the studio.</p></div>
+      <div class="svc-div"></div>
+      <div class="svc reveal"><div class="num">ii</div><h3>Made-to-Measure</h3><p>Our core pieces, cut and fitted precisely to your measurements over two fittings.</p></div>
+      <div class="svc-div"></div>
+      <div class="svc reveal"><div class="num">iii</div><h3>Occasion &amp; Bridal</h3><p>One-of-a-kind pieces for weddings and events, designed with you from first sketch.</p></div>
+      <div class="svc-div"></div>
+      <div class="svc reveal"><div class="num">iv</div><h3>Personal Styling</h3><p>A private session to build a considered wardrobe around the pieces you already love.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="appointment" class="appt-sec">
+  <div class="wrap reveal">
+    <span class="ey">By appointment</span>
+    <h2>Visit the <em>studio.</em></h2>
+    <p>Fittings and styling are one-to-one and by appointment, so the room is yours. Tell us a little about what you're looking for and we'll be in touch to arrange a time.</p>
+    <a href="#" class="btn">Request an appointment</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Ashmere</div>
+        <p>An atelier of considered clothing — ready-to-wear and made-to-measure, made by hand in small runs.</p>
+      </div>
+      <div class="foot-col">
+        <h4>The Studio</h4>
+        <p>By appointment<br>12 Sable Court</p>
+        <p>atelier@ashmere.example</p>
+        <p>+00 000 000 0000</p>
+      </div>
+      <div class="foot-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Newsletter</a>
+        <a href="#">Lookbook</a>
+        <a href="#">Stockists</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Ashmere — Demo site for portfolio use</span>
+      <span>Atelier · Ready-to-Wear</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>60);
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

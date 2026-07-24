@@ -1,0 +1,187 @@
+{
+  "items": [
+    {
+      "slug": "flowgenius-ap-platform",
+      "title": "FlowGenius \u2014 AI-Assisted Accounts Payable",
+      "category": "AI",
+      "description": "An invoice-to-payment platform with AI-extracted invoice data, role-based approvals and tamper-evident audit trails.",
+      "thumbnail": "/projects/flowgenius-ap-platform/cover.jpg",
+      "technologies": [
+        ".NET",
+        "Blazor",
+        "C#",
+        "Entity Framework Core",
+        "SQL Server",
+        "Hangfire"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": true,
+      "images": [],
+      "details": {
+        "overview": "Built in a 10-day hackathon sprint leading a team of 7, FlowGenius is an end-to-end accounts-payable platform covering AI-extracted invoice data, role-based access across 5 roles (Requestor, AP, HOD, Verifier, SuperAdmin) and dual-control payment verification.",
+        "highlights": [
+          "Multi-stage payment state machine (Draft \u2192 Submitted \u2192 AP \u2192 HOD Approval \u2192 Payment Marked \u2192 Verified) across 13 .NET controllers and Razor screens.",
+          "Same-person verification guard enforcing segregation of duties, plus an immutable audit hash chain capturing 8 event types.",
+          "AI invoice extraction with per-field confidence scoring and an AI Quality Dashboard tracking accuracy and P95 latency.",
+          "Hangfire background jobs powering extraction and metrics."
+        ]
+      }
+    },
+    {
+      "slug": "asap-semiconductor-ecosystem",
+      "title": "ASAP Semiconductor Ecosystem",
+      "category": "Full Stack",
+      "description": "High-traffic e-commerce platform managing millions of SKUs with real-time quoting, CDN and technical SEO.",
+      "thumbnail": "/projects/asap-semiconductor-ecosystem/cover.jpg",
+      "technologies": [
+        ".NET Core",
+        "ASP.NET Web API",
+        "Angular",
+        "SQL Server",
+        "Azure"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": true,
+      "images": [],
+      "details": {
+        "overview": "Led development of high-traffic modules of a semiconductor e-commerce platform architected to manage millions of SKUs and generate real-time quotes for international buyers.",
+        "highlights": [
+          "Global CDN strategy for static content \u2014 30% lower server load and faster international page loads.",
+          "Reduced cloud egress and data-transfer costs through response optimization.",
+          "Technical SEO with Schema markup, Core Web Vitals improvements and Server-Side Rendering (SSR).",
+          "Scalable architecture built for high concurrency and large catalogs."
+        ]
+      }
+    },
+    {
+      "slug": "virtual-advisor-crm",
+      "title": "Virtual Advisor CRM",
+      "category": "Full Stack",
+      "description": "A CRM system facilitating customer relationship management, sales processes and internal workflows.",
+      "thumbnail": "/projects/virtual-advisor-crm/cover.jpg",
+      "technologies": [
+        "ASP.NET Core",
+        "Angular",
+        "JavaScript",
+        "SQL Server"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": true,
+      "images": [],
+      "details": {
+        "overview": "Virtual Advisor is a CRM platform built for client Nextek, supporting customer relationship management, sales pipelines and internal team workflows, alongside sister products Generation Vault and Campaign Builder.",
+        "highlights": [
+          "Built, maintained and enhanced core system modules for performance and scalability.",
+          "Improved user experience across sales and workflow tools.",
+          "Part of a wider product suite serving business operations."
+        ]
+      }
+    },
+    {
+      "slug": "gas-distribution-system",
+      "title": "Gas Distribution Management System",
+      "category": "Full Stack",
+      "description": "Cylinder inventory, customer orders, delivery tracking and billing for a gas distributor.",
+      "thumbnail": "/projects/gas-distribution-system/cover.jpg",
+      "technologies": [
+        "ASP.NET Core",
+        "Angular",
+        "JavaScript",
+        "SQL Server"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": false,
+      "images": [],
+      "details": {
+        "overview": "A personalized management system for Wright Brothers Global Gas that optimized administration of cylinder inventory, customer orders, delivery tracking and billing.",
+        "highlights": [
+          "Automation solutions that reduced manual work.",
+          "Improved customer-service efficiency.",
+          "End-to-end order and billing lifecycle management."
+        ]
+      }
+    },
+    {
+      "slug": "wasa-automation",
+      "title": "WASA Tubewell & Filtration Automation",
+      "category": "Web Development",
+      "description": "Web-based monitoring and automation systems for water tubewells and filtration plants with 3D HMI views.",
+      "thumbnail": "/projects/wasa-automation/cover.jpg",
+      "technologies": [
+        "ASP.NET MVC",
+        "C#",
+        "SQL Server",
+        "JavaScript",
+        "Bootstrap"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": false,
+      "images": [],
+      "details": {
+        "overview": "Two automation systems for WASA (Water & Sanitation Authority): a tubewell monitoring system and a filtration-plant supervision interface, both replacing manual monitoring effort.",
+        "highlights": [
+          "Real-time dashboards and reports for voltage, current, frequency and motor status.",
+          "3D HMI visualization of live plant parameters.",
+          "Fault-detection notifications for power failures and inactive tubewells.",
+          "Chlorine concentration, tank status and water-flow supervision with alarm modules."
+        ]
+      }
+    },
+    {
+      "slug": "intelligent-home-automation",
+      "title": "Intelligent Home Automation System",
+      "category": "AI",
+      "description": "AI-powered home automation with 3D-CNN facial recognition and remote appliance control.",
+      "thumbnail": "/projects/intelligent-home-automation/cover.jpg",
+      "technologies": [
+        "Machine Learning",
+        "C#",
+        "Android",
+        "3D-CNN"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": false,
+      "images": [],
+      "details": {
+        "overview": "Final-year project: an AI-powered home automation system with two modules \u2014 a smart door and smart appliances \u2014 incubated at Nspire (Netsol) after a pitch at the Plan9 Incubation Center.",
+        "highlights": [
+          "Smart Door: facial recognition using a 3D Convolutional Neural Network (3D-CNN) to authenticate and unlock doors for registered users.",
+          "Smart Appliances: Android app and C# web interface for remote control of home electronics.",
+          "Hardware\u2013software integration for seamless automation.",
+          "Entrepreneurship: user surveys, cost estimation and market feasibility; secured startup incubation."
+        ]
+      }
+    },
+    {
+      "slug": "llm-tool-calling-research",
+      "title": "Failure Modes & Recovery in LLM Tool-Calling",
+      "category": "Research",
+      "description": "MSc research studying how LLM tool-calling pipelines fail and how they can recover.",
+      "thumbnail": "/projects/llm-tool-calling-research/cover.jpg",
+      "technologies": [
+        "Python",
+        "LLM Agents",
+        "Tool-Calling",
+        "Evaluation"
+      ],
+      "github": "",
+      "demo": "",
+      "featured": false,
+      "images": [],
+      "details": {
+        "overview": "Ongoing MSc (Artificial Intelligence) research at UET investigating failure modes in LLM tool-calling pipelines and strategies for detecting and recovering from them.",
+        "highlights": [
+          "Cataloguing common failure modes in tool-augmented LLM systems.",
+          "Designing recovery and self-correction strategies.",
+          "Building evaluation harnesses to measure reliability."
+        ]
+      }
+    }
+  ]
+}

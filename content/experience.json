@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "company": "TKXEL",
+      "role": "Senior Software Engineer",
+      "duration": "Dec 2025 — Present",
+      "responsibilities": [
+        "Led development of high-traffic modules of the ASAP Semiconductor e-commerce platform, architected to manage millions of SKUs and generate real-time quotes.",
+        "Designed and implemented a global CDN strategy for static content, reducing server load by 30% and improving international page-load times.",
+        "Partnered with the SEO team on technical SEO — Schema markup, Core Web Vitals and Server-Side Rendering (SSR) — substantially increasing organic search visibility.",
+        "Built FlowGenius, an AI-assisted accounts-payable platform, in a 10-day hackathon sprint leading a team of 7."
+      ],
+      "technologies": [".NET", "Blazor", "C#", "Entity Framework Core", "SQL Server", "Hangfire"]
+    },
+    {
+      "company": "Cinnova Technologies",
+      "role": "Software Engineer",
+      "duration": "Jul 2022 — Nov 2025",
+      "responsibilities": [
+        "Built and enhanced business applications for client Nextek, including VirtualAdvisor, Generation Vault and Campaign Builder.",
+        "Focused on Virtual Advisor, a CRM system for customer relationship management, sales processes and internal workflows.",
+        "Designed a Gas Distribution Management System for Wright Brothers Global Gas covering inventory, orders, delivery tracking and billing.",
+        "Delivered automation solutions that reduced manual work and improved customer-service efficiency."
+      ],
+      "technologies": ["ASP.NET Core", "ASP.NET MVC", "Angular", "JavaScript", "SQL Server"]
+    },
+    {
+      "company": "Information Technology University",
+      "role": "Software Engineer",
+      "duration": "Sep 2020 — Jun 2022",
+      "responsibilities": [
+        "Built the WASA Tubewell Automation system to automate watering tasks and eliminate manual effort.",
+        "Developed dashboards, real-time reports and a 3D HMI view for voltage, current, frequency and motor status, with fault-detection notifications.",
+        "Delivered the WASA Filtration Plants Automation interface to supervise chlorine concentration, tank status and water flow, with real-time reporting and alarm modules."
+      ],
+      "technologies": ["ASP.NET MVC", "C#", "SQL Server", "JavaScript", "Bootstrap"]
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hollowfield — Strength &amp; Conditioning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --concrete:#ece8df;      /* warm concrete paper */
+    --concrete-2:#e0dbcf;
+    --ink:#15140f;           /* near-black */
+    --ink-2:#3a382f;
+    --grey:#78746a;
+    --line:#cfc9bb;
+    --blaze:#e8471c;         /* single energetic accent */
+    --blaze-deep:#c83a12;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Barlow",system-ui,sans-serif;background:var(--concrete);color:var(--ink);
+    line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .cond{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.01em;line-height:.92}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  .tag{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.22em;font-size:.82rem;color:var(--blaze)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .3s,box-shadow .3s}
+  nav.scrolled{background:var(--ink)}
+  .nav-in{max-width:1240px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{font-family:"Barlow Condensed";font-weight:900;font-size:1.55rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);transition:color .3s}
+  nav.scrolled .brand{color:var(--concrete)}
+  .brand span{color:var(--blaze)}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-family:"Barlow Condensed";font-weight:600;text-transform:uppercase;letter-spacing:.08em;font-size:1rem;color:var(--ink-2);transition:color .25s}
+  nav.scrolled .nav-links a{color:var(--concrete)}
+  .nav-links a:hover{color:var(--blaze)}
+  .nav-links a.join{background:var(--blaze);color:#fff!important;padding:10px 22px;letter-spacing:.1em}
+  nav.scrolled .nav-links a.join{color:#fff!important}
+  .nav-links a.join:hover{background:var(--blaze-deep);color:#fff!important}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.5rem;cursor:pointer;color:var(--ink)}
+  nav.scrolled .nav-toggle{color:var(--concrete)}
+
+  /* HERO */
+  header{padding:150px 0 0}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:end}
+  .hero-l .tag{display:block;margin-bottom:18px}
+  header h1{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;line-height:.86;
+    font-size:clamp(3.4rem,10vw,8.2rem);letter-spacing:-.005em}
+  header h1 .out{color:transparent;-webkit-text-stroke:2px var(--ink)}
+  header h1 em{font-style:normal;color:var(--blaze)}
+  .hero-l p{max-width:44ch;margin-top:22px;font-size:1.1rem;color:var(--ink-2)}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap}
+  .btn{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:1.05rem;
+    padding:15px 30px;cursor:pointer;border:2px solid var(--ink);transition:all .25s;display:inline-block}
+  .btn-fill{background:var(--blaze);border-color:var(--blaze);color:#fff}
+  .btn-fill:hover{background:var(--blaze-deep);border-color:var(--blaze-deep)}
+  .btn-ghost:hover{background:var(--ink);color:var(--concrete)}
+  .hero-r{height:min(64vh,560px);background:var(--ink);
+    background-image:url("https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center}
+
+  /* MARQUEE */
+  .marquee{margin-top:60px;background:var(--ink);color:var(--concrete);overflow:hidden;white-space:nowrap;padding:16px 0}
+  .marquee .track{display:inline-block;animation:scroll 26s linear infinite}
+  .marquee span{font-family:"Barlow Condensed";font-weight:800;text-transform:uppercase;font-size:1.4rem;letter-spacing:.04em;padding:0 26px}
+  .marquee span i{color:var(--blaze);font-style:normal;padding-left:26px}
+  @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* SECTION */
+  section{padding:104px 0}
+  .head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:44px;flex-wrap:wrap}
+  .head h2{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5vw,4rem);line-height:.9}
+  .head p{color:var(--ink-2);max-width:40ch}
+
+  /* PROGRAMS */
+  .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .prog{position:relative;min-height:340px;overflow:hidden;background:var(--ink);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:32px}
+  .prog::before{content:"";position:absolute;inset:0;background-size:cover;background-position:center;
+    transform:scale(1);transition:transform .7s cubic-bezier(.2,.7,.2,1);z-index:0}
+  .prog::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,9,6,.15),rgba(10,9,6,.82));z-index:1}
+  .prog:hover::before{transform:scale(1.06)}
+  .prog>*{position:relative;z-index:2}
+  .prog .pn{font-family:"Barlow Condensed";font-weight:700;color:var(--blaze);letter-spacing:.14em;font-size:.9rem;margin-bottom:8px}
+  .prog h3{font-family:"Barlow Condensed";font-weight:800;text-transform:uppercase;font-size:2rem;line-height:.95}
+  .prog p{margin-top:10px;font-size:.98rem;color:rgba(255,255,255,.82);max-width:38ch}
+  .p1::before{background-image:url("https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=900&q=80&auto=format&fit=crop")}
+  .p2::before{background-image:url("https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=900&q=80&auto=format&fit=crop")}
+  .p3::before{background-image:url("https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=900&q=80&auto=format&fit=crop")}
+  .p4::before{background-image:url("https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=900&q=80&auto=format&fit=crop")}
+
+  /* STATS BAND */
+  .stats{background:var(--ink);color:var(--concrete)}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;text-align:center}
+  .stats .n{font-family:"Barlow Condensed";font-weight:900;font-size:clamp(2.6rem,6vw,4.6rem);line-height:1;color:#fff}
+  .stats .n em{color:var(--blaze);font-style:normal}
+  .stats .s{font-family:"Barlow Condensed";font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:.86rem;color:rgba(236,232,223,.7);margin-top:6px}
+
+  /* SCHEDULE */
+  .sched{border-top:1px solid var(--line)}
+  .timetable{border-top:2px solid var(--ink)}
+  .trow{display:grid;grid-template-columns:120px 1fr 1fr 1fr;gap:16px;padding:20px 4px;border-bottom:1px solid var(--line);align-items:center}
+  .trow.hd{border-bottom:2px solid var(--ink)}
+  .trow.hd div{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:.9rem;color:var(--grey)}
+  .ttime{font-family:"Barlow Condensed";font-weight:800;font-size:1.3rem}
+  .cls{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;font-size:1.15rem;line-height:1}
+  .cls small{display:block;font-family:"Barlow";font-weight:400;text-transform:none;letter-spacing:0;color:var(--grey);font-size:.82rem;margin-top:3px}
+  .cls.blaze{color:var(--blaze)}
+
+  /* PRICING */
+  .price{background:var(--concrete-2)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .card{background:var(--concrete);border:2px solid var(--ink);padding:34px;display:flex;flex-direction:column}
+  .card.feature{background:var(--ink);color:var(--concrete)}
+  .card .ptier{font-family:"Barlow Condensed";font-weight:800;text-transform:uppercase;font-size:1.5rem}
+  .card .pamt{font-family:"Barlow Condensed";font-weight:900;font-size:3.4rem;line-height:1;margin:16px 0 4px}
+  .card .pamt sup{font-size:1.2rem;font-weight:700;vertical-align:super}
+  .card .per{font-family:"Barlow Condensed";text-transform:uppercase;letter-spacing:.12em;font-size:.82rem;color:var(--grey)}
+  .card.feature .per{color:rgba(236,232,223,.6)}
+  .card ul{list-style:none;margin:24px 0;flex:1}
+  .card li{padding:9px 0;border-bottom:1px solid var(--line);font-size:.96rem}
+  .card.feature li{border-color:rgba(236,232,223,.16)}
+  .card li::before{content:"—";color:var(--blaze);font-weight:700;margin-right:10px}
+  .ptag{align-self:flex-start;font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+    font-size:.72rem;background:var(--blaze);color:#fff;padding:5px 12px;margin-bottom:6px}
+
+  /* CTA / CONTACT */
+  .cta{background:var(--blaze);color:#fff;text-align:center}
+  .cta h2{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;font-size:clamp(2.6rem,7vw,6rem);line-height:.9}
+  .cta p{max-width:44ch;margin:20px auto 34px;font-size:1.1rem;color:rgba(255,255,255,.9)}
+  .cta .btn{border-color:#fff;color:#fff;background:transparent}
+  .cta .btn:hover{background:#fff;color:var(--blaze)}
+
+  footer{background:var(--ink);color:rgba(236,232,223,.7);padding:70px 0 36px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:44px;padding-bottom:44px;border-bottom:1px solid rgba(236,232,223,.14)}
+  .foot-brand{font-family:"Barlow Condensed";font-weight:900;text-transform:uppercase;font-size:2rem;color:#fff}
+  .foot-brand span{color:var(--blaze)}
+  .foot-grid p{margin-top:12px;font-size:.95rem}
+  .foot-col h4{font-family:"Barlow Condensed";font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:.82rem;color:var(--blaze);margin-bottom:14px}
+  .foot-col a,.foot-col p{display:block;margin-bottom:8px;font-size:.95rem;transition:color .25s}
+  .foot-col a:hover{color:#fff}
+  .foot-bottom{padding-top:24px;display:flex;justify-content:space-between;font-size:.82rem;flex-wrap:wrap;gap:10px;font-family:"Barlow Condensed";letter-spacing:.08em;text-transform:uppercase}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .nav-in,.foot-grid{padding-left:22px}
+    .wrap{padding:0 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:330px;background:var(--ink);flex-direction:column;
+      justify-content:center;gap:26px;transform:translateX(100%);transition:transform .4s ease;z-index:55}
+    .nav-links.open{transform:none}
+    .nav-links a{color:var(--concrete)}
+    .nav-toggle{display:block;z-index:60}
+    header{padding:120px 0 0}
+    .hero-grid{grid-template-columns:1fr;gap:30px}
+    .hero-r{height:44vh;order:2}
+    section{padding:66px 0}
+    .prog-grid{grid-template-columns:1fr}
+    .stats-grid{grid-template-columns:1fr 1fr;gap:36px 20px}
+    .trow{grid-template-columns:88px 1fr;row-gap:6px}
+    .trow .c-wed,.trow .c-fri{display:none}
+    .trow.hd .c-wed,.trow.hd .c-fri{display:none}
+    .price-grid{grid-template-columns:1fr}
+    .foot-grid{grid-template-columns:1fr;gap:30px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .marquee .track{animation:none}
+    .prog::before{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="brand">Hollow<span>field</span></div>
+    <div class="nav-links" id="navlinks">
+      <a href="#programs">Programs</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#join" class="join">Join now</a>
+    </div>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-l">
+        <span class="tag">Strength &amp; Conditioning · Est. 2018</span>
+        <h1>Show up.<br><em>Get</em> <span class="out">strong.</span></h1>
+        <p>A no-frills strength gym with serious kit, real coaching, and classes that actually get you results. Beginners welcome — egos left at the door.</p>
+        <div class="hero-cta">
+          <a href="#join" class="btn btn-fill">Start free week</a>
+          <a href="#programs" class="btn btn-ghost">See programs</a>
+        </div>
+      </div>
+      <div class="hero-r reveal"></div>
+    </div>
+  </div>
+
+  <div class="marquee">
+    <div class="track">
+      <span>Strength<i>◆</i></span><span>Conditioning<i>◆</i></span><span>Powerlifting<i>◆</i></span><span>Olympic Lifting<i>◆</i></span><span>HIIT<i>◆</i></span><span>Personal Training<i>◆</i></span><span>Mobility<i>◆</i></span><span>Open Gym<i>◆</i></span>
+      <span>Strength<i>◆</i></span><span>Conditioning<i>◆</i></span><span>Powerlifting<i>◆</i></span><span>Olympic Lifting<i>◆</i></span><span>HIIT<i>◆</i></span><span>Personal Training<i>◆</i></span><span>Mobility<i>◆</i></span><span>Open Gym<i>◆</i></span>
+    </div>
+  </div>
+</header>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>What we<br>train</h2>
+      <p>Four ways to train under one roof. Mix and match — your membership covers all of them.</p>
+    </div>
+    <div class="prog-grid">
+      <div class="prog p1 reveal"><div class="pn">01 — Barbell</div><h3>Strength</h3><p>Squat, press, deadlift. Structured programming to add real weight to the bar, coached every step.</p></div>
+      <div class="prog p2 reveal"><div class="pn">02 — Engine</div><h3>Conditioning</h3><p>Kettlebells, sleds, and intervals built to raise your work capacity without wrecking your knees.</p></div>
+      <div class="prog p3 reveal"><div class="pn">03 — Group</div><h3>Classes</h3><p>45-minute coached sessions, capped small so you're never just a number on the floor.</p></div>
+      <div class="prog p4 reveal"><div class="pn">04 — 1-to-1</div><h3>Personal Training</h3><p>Fully tailored coaching and nutrition for a specific goal, on your schedule.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="reveal"><div class="n">6<em>am</em></div><div class="s">Doors open</div></div>
+    <div class="reveal"><div class="n">40<em>+</em></div><div class="s">Classes a week</div></div>
+    <div class="reveal"><div class="n">8</div><div class="s">Certified coaches</div></div>
+    <div class="reveal"><div class="n">24<em>/7</em></div><div class="s">Member access</div></div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="sched">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Class<br>schedule</h2>
+      <p>A slice of the weekly timetable. Full schedule and booking live in the member app.</p>
+    </div>
+    <div class="timetable reveal">
+      <div class="trow hd"><div>Time</div><div>Mon</div><div class="c-wed">Wed</div><div class="c-fri">Fri</div></div>
+      <div class="trow">
+        <div class="ttime">6:00</div>
+        <div class="cls blaze">Strength<small>Lower body</small></div>
+        <div class="cls c-wed">Conditioning<small>Intervals</small></div>
+        <div class="cls c-fri blaze">Strength<small>Full body</small></div>
+      </div>
+      <div class="trow">
+        <div class="ttime">12:00</div>
+        <div class="cls">Express HIIT<small>45 min</small></div>
+        <div class="cls c-wed">Express HIIT<small>45 min</small></div>
+        <div class="cls c-fri">Mobility<small>Recovery</small></div>
+      </div>
+      <div class="trow">
+        <div class="ttime">5:30</div>
+        <div class="cls">Olympic Lifting<small>Technique</small></div>
+        <div class="cls c-wed blaze">Strength<small>Upper body</small></div>
+        <div class="cls c-fri">Conditioning<small>Engine</small></div>
+      </div>
+      <div class="trow">
+        <div class="ttime">7:00</div>
+        <div class="cls">Open Gym<small>Coached floor</small></div>
+        <div class="cls c-wed">Open Gym<small>Coached floor</small></div>
+        <div class="cls c-fri">Open Gym<small>Coached floor</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="price">
+  <div class="wrap">
+    <div class="head reveal">
+      <h2>Membership</h2>
+      <p>No joining fee, no lock-in. Cancel any time with a month's notice.</p>
+    </div>
+    <div class="price-grid">
+      <div class="card reveal">
+        <div class="ptier">Off-Peak</div>
+        <div class="pamt"><sup>$</sup>29</div><div class="per">per month</div>
+        <ul>
+          <li>Gym access 10am–4pm</li>
+          <li>All group classes off-peak</li>
+          <li>Member app &amp; tracking</li>
+          <li>Free intro session</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Choose plan</a>
+      </div>
+      <div class="card feature reveal">
+        <div class="ptag">Most popular</div>
+        <div class="ptier">Full Access</div>
+        <div class="pamt"><sup>$</sup>49</div><div class="per">per month</div>
+        <ul>
+          <li>24/7 gym access</li>
+          <li>Unlimited group classes</li>
+          <li>Monthly progress check-in</li>
+          <li>Open gym + coached floor</li>
+        </ul>
+        <a href="#join" class="btn btn-fill">Choose plan</a>
+      </div>
+      <div class="card reveal">
+        <div class="ptier">Coached</div>
+        <div class="pamt"><sup>$</sup>119</div><div class="per">per month</div>
+        <ul>
+          <li>Everything in Full Access</li>
+          <li>4 personal training sessions</li>
+          <li>Tailored programming</li>
+          <li>Nutrition guidance</li>
+        </ul>
+        <a href="#join" class="btn btn-ghost">Choose plan</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="join" class="cta">
+  <div class="wrap">
+    <h2>Your first<br>week's on us.</h2>
+    <p>Come train free for seven days. Meet the coaches, try a class, use the floor — then decide.</p>
+    <a href="#" class="btn">Claim your free week</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Hollow<span>field</span></div>
+        <p>Strength &amp; conditioning for people who want to get properly strong. Come as you are.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Find us</h4>
+        <p>Unit 7, Ironworks Yard<br>40 Depot Road</p>
+        <p>train@hollowfield.example</p>
+        <p>+00 000 000 0000</p>
+      </div>
+      <div class="foot-col">
+        <h4>Hours</h4>
+        <p>Mon–Fri · 6am – 10pm</p>
+        <p>Sat–Sun · 8am – 6pm</p>
+        <p>Members · 24/7 access</p>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Hollowfield — Demo site for portfolio use</span>
+      <span>Strength &amp; Conditioning</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>40);
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

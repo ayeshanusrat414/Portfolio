@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 255 255 255;
+  --foreground: 10 10 10;
+  --muted: 115 115 115;
+  --card: 255 255 255;
+  --border: 229 229 229;
+  --subtle: 245 245 247;
+}
+
+.dark {
+  --background: 10 10 10;
+  --foreground: 245 245 247;
+  --muted: 161 161 170;
+  --card: 20 20 22;
+  --border: 38 38 42;
+  --subtle: 24 24 27;
+}
+
+@layer base {
+  * {
+    border-color: rgb(var(--border));
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem; /* offset for sticky navbar */
+  }
+
+  body {
+    background-color: rgb(var(--background));
+    color: rgb(var(--foreground));
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Respect reduced motion preferences globally. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  /* Visible keyboard focus for accessibility. */
+  :focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .bg-card {
+    background-color: rgb(var(--card));
+  }
+  .bg-subtle {
+    background-color: rgb(var(--subtle));
+  }
+  .text-muted {
+    color: rgb(var(--muted));
+  }
+  .border-default {
+    border-color: rgb(var(--border));
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-content px-6 sm:px-8;
+  }
+
+  .section-eyebrow {
+    @apply mb-3 text-sm font-medium uppercase tracking-widest text-accent;
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-semibold tracking-tight sm:text-4xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-200 focus-visible:outline-none;
+  }
+  .btn-primary {
+    @apply btn bg-accent text-white hover:bg-accent-600 hover:shadow-lg hover:shadow-accent/25;
+  }
+  .btn-secondary {
+    @apply btn border border-default bg-card hover:bg-subtle;
+  }
+}
+
+/* Subtle animated dotted grid used behind the hero. */
+.hero-grid {
+  background-image: radial-gradient(
+    rgb(var(--border)) 1px,
+    transparent 1px
+  );
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 40%,
+    black 40%,
+    transparent 100%
+  );
+}

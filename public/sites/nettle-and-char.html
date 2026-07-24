@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nettle &amp; Char — Seasonal Plates, Slow Evenings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16201c;        /* deep pine, near-black green */
+    --ink-soft:#1e2b26;
+    --cream:#f4efe4;       /* warm paper */
+    --cream-deep:#eae2d1;
+    --brass:#b08a4a;       /* single accent */
+    --brass-bright:#c8a05c;
+    --moss:#8a9a6b;        /* muted secondary */
+    --stone:#6f6a5c;       /* muted text on cream */
+    --stone-light:#b7b0a0;
+    --line:rgba(255,255,255,.14);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"DM Sans",system-ui,sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:"Fraunces",Georgia,serif;font-weight:400;line-height:1.05}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+
+  .eyebrow{
+    font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+    font-weight:600;color:var(--brass);
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px}
+
+  /* ---- NAV ---- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:22px 40px;transition:background .4s ease,padding .4s ease,box-shadow .4s ease;
+  }
+  nav.scrolled{background:var(--ink);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
+  .brand{font-family:"Fraunces";font-size:1.35rem;color:var(--cream);letter-spacing:.01em}
+  .brand .amp{color:var(--brass);font-style:italic;padding:0 .12em}
+  .nav-links{display:flex;gap:34px;align-items:center}
+  .nav-links a{
+    font-size:.82rem;letter-spacing:.06em;color:var(--cream);opacity:.85;
+    text-transform:uppercase;font-weight:500;transition:opacity .25s;
+  }
+  .nav-links a:hover{opacity:1}
+  .nav-cta{
+    border:1px solid var(--brass);color:var(--brass)!important;opacity:1!important;
+    padding:9px 20px;border-radius:2px;transition:background .3s,color .3s;
+  }
+  .nav-cta:hover{background:var(--brass);color:var(--ink)!important}
+  .nav-toggle{display:none;background:none;border:0;color:var(--cream);font-size:1.5rem;cursor:pointer}
+
+  /* ---- HERO ---- */
+  header{
+    position:relative;min-height:100vh;display:flex;align-items:flex-end;
+    background:var(--ink);
+    background-image:linear-gradient(180deg,rgba(11,17,14,.35) 0%,rgba(11,17,14,.25) 40%,rgba(11,17,14,.92) 100%),
+      url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1900&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center;
+  }
+  .hero-inner{padding:0 40px 76px;width:100%}
+  .hero-eyebrow{color:var(--brass-bright);display:flex;align-items:center;gap:14px;margin-bottom:22px}
+  .hero-eyebrow::before{content:"";width:46px;height:1px;background:var(--brass)}
+  header h1{
+    color:var(--cream);
+    font-size:clamp(3.2rem,9vw,7.4rem);
+    letter-spacing:-.01em;max-width:14ch;
+  }
+  header h1 em{font-style:italic;color:var(--brass-bright)}
+  .hero-sub{
+    color:var(--cream);opacity:.8;font-size:clamp(1rem,1.6vw,1.2rem);
+    max-width:44ch;margin-top:26px;
+  }
+  .hero-meta{
+    display:flex;gap:38px;margin-top:40px;flex-wrap:wrap;
+    color:var(--cream);opacity:.85;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+  }
+  .hero-meta span{display:flex;align-items:center;gap:10px}
+  .hero-meta span::before{content:"";width:5px;height:5px;background:var(--brass);border-radius:50%}
+
+  /* ---- SECTION SHELLS ---- */
+  section{padding:120px 0}
+  .section-head{max-width:640px}
+  .section-head h2{font-size:clamp(2.2rem,4.5vw,3.6rem);margin:18px 0 0;letter-spacing:-.01em}
+  .section-head p{color:var(--stone);margin-top:20px;font-size:1.06rem}
+
+  /* ---- ABOUT ---- */
+  .about{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;align-items:center}
+  .about-photo{
+    aspect-ratio:4/5;border-radius:3px;background:var(--ink-soft);
+    background-image:url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center;position:relative;
+  }
+  .about-photo::after{
+    content:"est. 2019";position:absolute;bottom:22px;left:22px;
+    font-family:"Fraunces";font-style:italic;font-size:1rem;color:var(--cream);
+    background:rgba(22,32,28,.55);backdrop-filter:blur(4px);padding:6px 16px;border-radius:2px;
+  }
+  .about-body h2{font-size:clamp(2rem,4vw,3.1rem);margin:16px 0 0}
+  .about-body .lead{font-family:"Fraunces";font-size:1.5rem;line-height:1.45;margin:26px 0 20px;color:var(--ink)}
+  .about-body p{color:var(--stone);margin-bottom:16px}
+  .sign{font-family:"Fraunces";font-style:italic;font-size:1.4rem;color:var(--brass);margin-top:26px}
+
+  /* ---- MENU (signature) ---- */
+  .menu{background:var(--ink);color:var(--cream)}
+  .menu .section-head p{color:var(--stone-light)}
+  .menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px 80px;margin-top:66px}
+  .menu-col h3{
+    font-size:1rem;letter-spacing:.24em;text-transform:uppercase;color:var(--brass-bright);
+    font-family:"DM Sans";font-weight:600;padding-bottom:18px;margin-bottom:26px;
+    border-bottom:1px solid var(--line);
+  }
+  .dish{display:flex;align-items:baseline;gap:10px;margin-bottom:26px}
+  .dish-main{flex:0 1 auto}
+  .dish-name{font-family:"Fraunces";font-size:1.28rem;color:var(--cream)}
+  .dish-desc{font-size:.9rem;color:var(--stone-light);margin-top:3px;max-width:34ch}
+  .dish-lead{flex:1 1 auto;border-bottom:1px dotted rgba(255,255,255,.28);transform:translateY(-5px)}
+  .dish-price{font-family:"Fraunces";font-size:1.15rem;color:var(--brass-bright);white-space:nowrap}
+  .menu-note{
+    text-align:center;margin-top:66px;font-family:"Fraunces";font-style:italic;
+    color:var(--stone-light);font-size:1.05rem;
+  }
+
+  /* ---- GALLERY ---- */
+  .gallery{padding-bottom:120px}
+  .gallery-grid{
+    margin-top:56px;display:grid;grid-template-columns:repeat(6,1fr);
+    grid-auto-rows:170px;gap:16px;
+  }
+  .gtile{background:var(--cream-deep);background-size:cover;background-position:center;border-radius:3px;
+    filter:saturate(1.02);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .gtile:hover{transform:scale(1.015)}
+  .g1{grid-column:span 3;grid-row:span 2}
+  .g2{grid-column:span 3;grid-row:span 1}
+  .g3{grid-column:span 3;grid-row:span 1}
+  .g4{grid-column:span 2;grid-row:span 1}
+  .g5{grid-column:span 2;grid-row:span 1}
+  .g6{grid-column:span 2;grid-row:span 1}
+
+  /* ---- RESERVE ---- */
+  .reserve{background:var(--cream-deep)}
+  .reserve-inner{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .reserve-form{background:var(--cream);padding:44px;border-radius:4px;box-shadow:0 30px 60px -40px rgba(22,32,28,.5)}
+  .field{margin-bottom:20px}
+  .field label{display:block;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--stone);margin-bottom:8px;font-weight:600}
+  .field input,.field select{
+    width:100%;padding:13px 15px;border:1px solid #d8d0be;background:#fbf8f1;border-radius:2px;
+    font-family:inherit;font-size:.98rem;color:var(--ink);transition:border-color .25s,box-shadow .25s;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(176,138,74,.15)}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .btn{
+    width:100%;margin-top:8px;padding:15px;background:var(--ink);color:var(--cream);
+    border:0;border-radius:2px;font-family:"DM Sans";font-size:.82rem;letter-spacing:.16em;
+    text-transform:uppercase;font-weight:600;cursor:pointer;transition:background .3s;
+  }
+  .btn:hover{background:var(--brass);color:var(--ink)}
+  .reserve-copy h2{font-size:clamp(2rem,4vw,3.2rem);margin:16px 0 20px}
+  .reserve-copy p{color:var(--stone);margin-bottom:26px;max-width:42ch}
+  .hours-line{display:flex;justify-content:space-between;max-width:340px;padding:12px 0;border-bottom:1px solid #d8d0be;font-size:.95rem}
+  .hours-line span:last-child{color:var(--stone)}
+  .form-msg{text-align:center;color:var(--moss);font-size:.9rem;margin-top:14px;min-height:1em;font-weight:500}
+
+  /* ---- FOOTER ---- */
+  footer{background:var(--ink);color:var(--cream);padding:80px 0 40px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:50px;padding-bottom:60px;border-bottom:1px solid var(--line)}
+  .foot-brand{font-family:"Fraunces";font-size:1.9rem}
+  .foot-brand .amp{color:var(--brass);font-style:italic}
+  .foot-grid p{opacity:.7;font-size:.95rem;margin-top:16px;max-width:34ch}
+  .foot-col h4{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-bright);margin-bottom:18px;font-weight:600}
+  .foot-col a,.foot-col p{display:block;opacity:.75;font-size:.95rem;margin:0 0 10px;transition:opacity .25s}
+  .foot-col a:hover{opacity:1}
+  .foot-bottom{display:flex;justify-content:space-between;padding-top:26px;font-size:.8rem;opacity:.55;flex-wrap:wrap;gap:10px}
+
+  /* ---- REVEAL ANIM ---- */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ---- RESPONSIVE ---- */
+  @media(max-width:860px){
+    nav{padding:16px 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:74%;max-width:320px;background:var(--ink);
+      flex-direction:column;justify-content:center;gap:28px;transform:translateX(100%);
+      transition:transform .4s ease;box-shadow:-20px 0 60px rgba(0,0,0,.4)}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block;z-index:60}
+    .wrap{padding:0 22px}
+    .hero-inner{padding:0 22px 56px}
+    section{padding:80px 0}
+    .about,.reserve-inner{grid-template-columns:1fr;gap:40px}
+    .about-photo{aspect-ratio:16/11}
+    .menu-grid{grid-template-columns:1fr;gap:44px}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+    .g1,.g2,.g3,.g4,.g5,.g6{grid-column:span 1;grid-row:span 1}
+    .g1{grid-column:span 2;grid-row:span 2}
+    .foot-grid{grid-template-columns:1fr;gap:34px}
+    .reserve-form{padding:30px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .gtile{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Nettle <span class="amp">&amp;</span> Char</div>
+  <div class="nav-links" id="navlinks">
+    <a href="#about">The Room</a>
+    <a href="#menu">Menu</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#reserve" class="nav-cta">Reserve</a>
+  </div>
+  <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+</nav>
+
+<header>
+  <div class="hero-inner">
+    <div class="hero-eyebrow eyebrow">A seasonal kitchen</div>
+    <h1>Slow evenings, <em>honest</em> plates.</h1>
+    <p class="hero-sub">A neighbourhood table built around the market that morning — cooked over fire, poured with care, and served without hurry.</p>
+    <div class="hero-meta">
+      <span>Dinner Tue – Sun</span>
+      <span>Wood-fired kitchen</span>
+      <span>Walk-ins welcome</span>
+    </div>
+  </div>
+</header>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap about">
+    <div class="about-photo reveal"></div>
+    <div class="about-body reveal">
+      <div class="eyebrow">The room</div>
+      <h2>A table set for the season.</h2>
+      <p class="lead">We change the menu when the market does — some weeks that means the first stone fruit, other weeks the last of the artichokes.</p>
+      <p>Nettle &amp; Char began as a supper club of eight seats and a single wood oven. It has grown, but the idea hasn't: cook a few things properly, let the produce lead, and give people a reason to stay an hour longer than they planned.</p>
+      <p>Everything on the pass is made in-house, from the sourdough we bake each morning to the bitters behind the bar.</p>
+      <div class="sign">— Elena &amp; Marco, owners</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu" class="menu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">This week's kitchen</div>
+      <h2>The Menu</h2>
+      <p>A short list that turns over often. Ask your server about the off-menu plate — there is usually one.</p>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-col reveal">
+        <h3>To Begin</h3>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Charred Bread &amp; Cultured Butter</div>
+            <div class="dish-desc">Day's sourdough, sea salt, smoked honey</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">9</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Heirloom Tomato &amp; Stracciatella</div>
+            <div class="dish-desc">Basil oil, toasted seeds, aged vinegar</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">14</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Grilled Little Gem</div>
+            <div class="dish-desc">Anchovy dressing, parmesan, lemon</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">12</div>
+        </div>
+      </div>
+
+      <div class="menu-col reveal">
+        <h3>From the Fire</h3>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Wood-Roasted Chicken</div>
+            <div class="dish-desc">Confit garlic, seasonal greens, pan jus</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">26</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Line-Caught Fish of the Day</div>
+            <div class="dish-desc">Brown butter, capers, new potatoes</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">31</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Hand-Rolled Pici</div>
+            <div class="dish-desc">Slow ragù, aged pecorino, cracked pepper</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">22</div>
+        </div>
+      </div>
+
+      <div class="menu-col reveal">
+        <h3>Sides</h3>
+        <div class="dish">
+          <div class="dish-main"><div class="dish-name">Ember Potatoes</div></div>
+          <div class="dish-lead"></div><div class="dish-price">8</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main"><div class="dish-name">Charred Greens, Chilli</div></div>
+          <div class="dish-lead"></div><div class="dish-price">9</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main"><div class="dish-name">Market Salad</div></div>
+          <div class="dish-lead"></div><div class="dish-price">7</div>
+        </div>
+      </div>
+
+      <div class="menu-col reveal">
+        <h3>To Finish</h3>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Olive Oil Cake</div>
+            <div class="dish-desc">Crème fraîche, poached fruit</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">10</div>
+        </div>
+        <div class="dish">
+          <div class="dish-main">
+            <div class="dish-name">Dark Chocolate Tart</div>
+            <div class="dish-desc">Sea salt, espresso cream</div>
+          </div>
+          <div class="dish-lead"></div><div class="dish-price">11</div>
+        </div>
+      </div>
+    </div>
+    <p class="menu-note reveal">A discretionary 12.5% is added for tables of six or more. Please tell us of any allergies.</p>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="gallery">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div class="eyebrow">Around the table</div>
+      <h2>An evening, in pictures.</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gtile g1" style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1100&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile g2" style="background-image:url('https://images.unsplash.com/photo-1600891964092-4316c288032e?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile g3" style="background-image:url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=900&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile g4" style="background-image:url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile g5" style="background-image:url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=700&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile g6" style="background-image:url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVE -->
+<section id="reserve" class="reserve">
+  <div class="wrap reserve-inner">
+    <div class="reserve-copy reveal">
+      <div class="eyebrow">Reservations</div>
+      <h2>Join us for dinner.</h2>
+      <p>Tables can be booked up to eight weeks ahead. For parties larger than eight, or to buy out the room, drop us a line and we'll look after you.</p>
+      <div class="hours-line"><span>Tuesday – Thursday</span><span>5:30 – 10:30 pm</span></div>
+      <div class="hours-line"><span>Friday – Saturday</span><span>5:00 – 11:30 pm</span></div>
+      <div class="hours-line"><span>Sunday</span><span>1:00 – 9:00 pm</span></div>
+      <div class="hours-line"><span>Monday</span><span>Closed</span></div>
+    </div>
+    <div class="reserve-form reveal">
+      <div class="row2">
+        <div class="field"><label for="nm">Name</label><input id="nm" type="text" placeholder="Your name"></div>
+        <div class="field"><label for="ph">Phone</label><input id="ph" type="tel" placeholder="Contact number"></div>
+      </div>
+      <div class="row2">
+        <div class="field"><label for="dt">Date</label><input id="dt" type="date"></div>
+        <div class="field"><label for="pp">Guests</label>
+          <select id="pp">
+            <option>2 guests</option><option>3 guests</option><option>4 guests</option>
+            <option>5 guests</option><option>6 guests</option><option>7+ guests</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label for="tm">Preferred time</label>
+        <select id="tm">
+          <option>6:00 pm</option><option>6:30 pm</option><option>7:00 pm</option>
+          <option>7:30 pm</option><option>8:00 pm</option><option>8:30 pm</option><option>9:00 pm</option>
+        </select>
+      </div>
+      <button class="btn" id="bookbtn">Request a table</button>
+      <div class="form-msg" id="formmsg"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">Nettle <span class="amp">&amp;</span> Char</div>
+        <p>A seasonal, wood-fired kitchen. Come hungry, stay late.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Find us</h4>
+        <p>14 Marlowe Lane<br>Riverside Quarter</p>
+        <p>hello@nettleandchar.example</p>
+        <p>+1 (555) 018 4420</p>
+      </div>
+      <div class="foot-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Newsletter</a>
+        <a href="#">Private dining</a>
+        <a href="#">Gift cards</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2025 Nettle &amp; Char. Demo site for portfolio use.</span>
+      <span>Designed with care.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav=document.getElementById('nav');
+  const onScroll=()=>{nav.classList.toggle('scrolled',window.scrollY>60)};
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  // mobile menu
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  // scroll reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // demo reservation feedback (no real submission)
+  document.getElementById('bookbtn').addEventListener('click',()=>{
+    const name=document.getElementById('nm').value.trim();
+    const msg=document.getElementById('formmsg');
+    msg.textContent = name
+      ? `Thank you, ${name.split(' ')[0]} — we'll confirm your table by text shortly.`
+      : 'Thanks — we\'ll confirm your table by text shortly.';
+  });
+</script>
+</body>
+</html>

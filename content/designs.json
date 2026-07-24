@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "title": "Art and Expression — Book Cover", "category": "Book Covers", "image": "/graphics/art-and-expression.jpg", "tags": ["Book Cover", "Watercolor"] },
+    { "title": "The Power of Knowledge — Book Cover", "category": "Book Covers", "image": "/graphics/power-of-knowledge.jpg", "tags": ["Book Cover", "Non-Fiction"] },
+    { "title": "Book Cover Collection", "category": "Book Covers", "image": "/graphics/book-cover-collection.jpg", "tags": ["Book Covers", "Series"] },
+    { "title": "We Shape Identities — Branding", "category": "Branding", "image": "/graphics/branding-identity.jpg", "tags": ["Branding", "Identity"] },
+    { "title": "Cosmetic Product Packaging", "category": "Packaging", "image": "/graphics/cosmetic-packaging.jpg", "tags": ["Packaging", "Product"] },
+    { "title": "Good Design — Typography Poster", "category": "Posters", "image": "/graphics/typography-poster.jpg", "tags": ["Typography", "Poster"] },
+    { "title": "Bringing Your Vision to Life", "category": "Posters", "image": "/graphics/freelance-poster.jpg", "tags": ["Poster", "Promo"] },
+    { "title": "Structured Design — Editorial", "category": "Editorial", "image": "/graphics/editorial-design.jpg", "tags": ["Editorial", "Layout"] },
+    { "title": "Digital Experience — Social Campaign", "category": "Social Media", "image": "/graphics/social-media-campaign.jpg", "tags": ["Social Media", "Campaign"] }
+  ]
+}

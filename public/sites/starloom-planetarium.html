@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Starloom — Planetarium &amp; Space Centre</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --space:#0c1030;
+    --space-2:#12173f;
+    --panel:#161c46;
+    --text:#eef1ff;
+    --muted:#9aa0cf;
+    --amber:#f2b545;
+    --amber-deep:#e09a24;
+    --cyan:#5fd0e6;
+    --violet:#9a7be8;
+    --line:rgba(255,255,255,.1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"Inter",system-ui,sans-serif;background:var(--space);color:var(--text);
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+    background-image:radial-gradient(circle at 15% 12%,rgba(154,123,232,.16),transparent 40%),
+      radial-gradient(circle at 85% 8%,rgba(95,208,230,.12),transparent 38%),
+      radial-gradient(1px 1px at 20% 30%,#fff,transparent),
+      radial-gradient(1px 1px at 70% 20%,#fff,transparent),
+      radial-gradient(1px 1px at 40% 70%,#dfe6ff,transparent),
+      radial-gradient(1px 1px at 90% 60%,#fff,transparent),
+      radial-gradient(1px 1px at 55% 45%,#cfe0ff,transparent),
+      radial-gradient(1px 1px at 33% 88%,#fff,transparent);
+    background-attachment:fixed;
+  }
+  .grotesk{font-family:"Space Grotesk",sans-serif}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 40px}
+  .eyebrow{font-family:"Space Grotesk";font-size:.76rem;letter-spacing:.24em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+  nav.scrolled{background:rgba(12,16,48,.82);backdrop-filter:blur(12px);border-color:var(--line)}
+  .nav-in{max-width:1200px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:700;font-size:1.35rem;letter-spacing:.02em}
+  .brand .orb{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffe6a8,var(--amber) 45%,var(--amber-deep));box-shadow:0 0 14px rgba(242,181,69,.7);flex:none}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-family:"Space Grotesk";font-size:.92rem;font-weight:500;color:var(--muted);transition:color .2s}
+  .nav-links a:hover{color:var(--text)}
+  .nav-links a.cta{background:var(--amber);color:#241a05!important;padding:9px 18px;border-radius:8px;font-weight:600}
+  .nav-links a.cta:hover{background:#ffca63}
+  .nav-toggle{display:none;background:none;border:0;color:var(--text);font-size:1.4rem;cursor:pointer}
+
+  /* HERO */
+  header{padding:150px 0 80px}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+  .hero-l .eyebrow{display:inline-block;margin-bottom:20px}
+  header h1{font-family:"Space Grotesk";font-weight:700;font-size:clamp(2.7rem,6vw,4.8rem);line-height:1;letter-spacing:-.02em}
+  header h1 em{font-style:normal;background:linear-gradient(120deg,var(--amber),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-l p{max-width:44ch;margin-top:22px;font-size:1.12rem;color:var(--muted)}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+  .btn{display:inline-block;font-family:"Space Grotesk";font-weight:600;font-size:.98rem;padding:14px 28px;border-radius:10px;cursor:pointer;transition:transform .25s,box-shadow .25s,background .25s,border-color .25s,color .25s;border:1px solid transparent}
+  .btn-amber{background:var(--amber);color:#241a05;box-shadow:0 8px 26px -8px rgba(242,181,69,.6)}
+  .btn-amber:hover{background:#ffca63;transform:translateY(-2px);box-shadow:0 14px 34px -8px rgba(242,181,69,.75)}
+  .btn-ghost{border-color:var(--line);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px);box-shadow:0 12px 30px -14px rgba(95,208,230,.6)}
+
+  /* SOLAR SYSTEM */
+  .system-wrap{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;position:relative}
+  .system{position:relative;width:640px;height:640px}
+  .system::before{content:"";position:absolute;top:50%;left:50%;width:580px;height:580px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle,rgba(154,123,232,.16),rgba(95,208,230,.06) 46%,transparent 68%)}
+  .sys-cap{font-family:"Space Grotesk";font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);opacity:.75}
+  .orbit{position:absolute;top:50%;left:50%;border:1px solid rgba(255,255,255,.08);border-radius:50%;
+    transform:translate(-50%,-50%);animation:spin linear infinite}
+  @keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+  .planet{position:absolute;top:0;left:50%;border-radius:50%;transform:translate(-50%,-50%);
+    box-shadow:inset -2px -2px 5px rgba(0,0,0,.45),0 0 8px rgba(0,0,0,.3)}
+  .sun{position:absolute;top:50%;left:50%;width:66px;height:66px;border-radius:50%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle at 38% 32%,#fff2c8,var(--amber) 42%,var(--amber-deep));
+    box-shadow:0 0 40px 8px rgba(242,181,69,.55),0 0 100px 20px rgba(242,181,69,.25);animation:pulse 5s ease-in-out infinite}
+  @keyframes pulse{0%,100%{box-shadow:0 0 40px 8px rgba(242,181,69,.55),0 0 100px 20px rgba(242,181,69,.22)}50%{box-shadow:0 0 52px 12px rgba(242,181,69,.7),0 0 120px 26px rgba(242,181,69,.3)}}
+
+  /* orbit sizes (2r) + speeds */
+  .o-me{width:150px;height:150px;animation-duration:9s}
+  .o-ve{width:206px;height:206px;animation-duration:14s}
+  .o-ea{width:264px;height:264px;animation-duration:19s;border-color:rgba(95,208,230,.3)}
+  .o-ma{width:322px;height:322px;animation-duration:25s}
+  .o-ju{width:430px;height:430px;animation-duration:40s}
+  .o-sa{width:520px;height:520px;animation-duration:52s}
+  .o-ur{width:590px;height:590px;animation-duration:62s}
+  .o-ne{width:636px;height:636px;animation-duration:74s}
+
+  .p-me{width:9px;height:9px;background:radial-gradient(circle at 35% 30%,#cfc9bd,#8f887a)}
+  .p-ve{width:14px;height:14px;background:radial-gradient(circle at 35% 30%,#f6dfa8,#cf9f57)}
+  .p-ea{width:16px;height:16px;background:radial-gradient(circle at 35% 30%,#8fc0ee,#2d5a97 58%,#2c7a52);box-shadow:inset -2px -2px 5px rgba(0,0,0,.45),0 0 12px 2px rgba(95,208,230,.6)}
+  .p-ma{width:12px;height:12px;background:radial-gradient(circle at 35% 30%,#e08262,#a8412a)}
+  .p-ju{width:30px;height:30px;background:radial-gradient(circle at 35% 30%,#f0cfa0,#d9a86b 55%,#b07f4a)}
+  .p-sa{width:25px;height:25px;background:radial-gradient(circle at 35% 30%,#f4e6bf,#e3c893 55%,#c2a066)}
+  .p-sa::after{content:"";position:absolute;top:50%;left:50%;width:46px;height:14px;border-radius:50%;
+    border:2px solid rgba(230,205,150,.6);transform:translate(-50%,-50%) rotate(-18deg)}
+  .p-ur{width:18px;height:18px;background:radial-gradient(circle at 35% 30%,#cdeef2,#9fd8e0 60%,#79b8c4)}
+  .p-ne{width:17px;height:17px;background:radial-gradient(circle at 35% 30%,#8fa2e8,#5b73d6 60%,#3f52ad)}
+
+  /* STATS BAND */
+  .stats-band{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.02)}
+  .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:40px 0;text-align:center}
+  .stat{position:relative}
+  .stat+.stat::before{content:"";position:absolute;left:-12px;top:50%;transform:translateY(-50%);width:1px;height:40px;background:var(--line)}
+  .stat .n{font-family:"Space Grotesk";font-weight:700;font-size:clamp(1.9rem,3.2vw,2.7rem);line-height:1;
+    background:linear-gradient(120deg,var(--amber),var(--cyan));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{font-family:"Space Grotesk";font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+
+  /* PLANETS SECTION */
+  section{padding:100px 0}
+  .sec-head{max-width:640px;margin-bottom:52px}
+  .sec-head h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(2rem,4vw,3.1rem);margin-top:14px;line-height:1.05}
+  .sec-head p{color:var(--muted);margin-top:16px;font-size:1.05rem}
+  .pl-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .pcard{position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));border:1px solid var(--line);
+    border-radius:18px;padding:30px 26px;transition:transform .35s,border-color .35s,box-shadow .35s;box-shadow:0 12px 32px -22px rgba(0,0,0,.7)}
+  .pcard::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent)}
+  .pcard:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.3);box-shadow:0 26px 54px -26px rgba(0,0,0,.85)}
+  .disc{width:58px;height:58px;border-radius:50%;margin-bottom:22px;
+    box-shadow:inset -5px -5px 12px rgba(0,0,0,.5),inset 3px 3px 9px rgba(255,255,255,.2),0 8px 18px -8px rgba(0,0,0,.6)}
+  .pcard h3{font-family:"Space Grotesk";font-weight:600;font-size:1.32rem}
+  .pcard .meta{font-family:"Space Grotesk";font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cyan);margin:5px 0 12px}
+  .pcard p{color:var(--muted);font-size:.9rem}
+
+  /* SHOWS */
+  .shows{background:rgba(255,255,255,.02);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .show-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+  .show{display:flex;gap:22px;align-items:flex-start;background:var(--space-2);border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:14px;padding:26px;transition:transform .3s,box-shadow .3s,border-color .3s}
+  .show:hover{transform:translateY(-4px);box-shadow:0 22px 46px -28px rgba(0,0,0,.85);border-left-color:var(--cyan)}
+  .show .time{font-family:"Space Grotesk";font-weight:700;font-size:1.7rem;color:var(--amber);line-height:1;flex:none;width:74px}
+  .show .time small{display:block;font-size:.66rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:6px}
+  .show h3{font-family:"Space Grotesk";font-weight:600;font-size:1.28rem}
+  .show .tags{font-size:.8rem;color:var(--muted);margin:6px 0 8px}
+  .show p{font-size:.92rem;color:var(--muted)}
+
+  /* VISIT */
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}
+  .info-row{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line);font-size:.98rem}
+  .info-row span:last-child{color:var(--muted)}
+  .tickets{background:linear-gradient(180deg,rgba(154,123,232,.14),rgba(95,208,230,.06));border:1px solid var(--line);border-radius:20px;padding:36px}
+  .tickets h3{font-family:"Space Grotesk";font-weight:600;font-size:1.4rem;margin-bottom:20px}
+  .trow{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line)}
+  .trow .grotesk{font-weight:600}
+  .trow .pr{font-family:"Space Grotesk";font-weight:700;font-size:1.3rem;color:var(--amber)}
+  .trow span.sub{font-size:.82rem;color:var(--muted)}
+
+  /* FINAL */
+  .final{text-align:center;padding:120px 0}
+  .final h2{font-family:"Space Grotesk";font-weight:700;font-size:clamp(2.4rem,5.5vw,4.4rem);line-height:1;max-width:18ch;margin:0 auto 20px}
+  .final h2 em{font-style:normal;background:linear-gradient(120deg,var(--amber),var(--violet));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .final p{color:var(--muted);max-width:44ch;margin:0 auto 34px;font-size:1.08rem}
+
+  footer{border-top:1px solid var(--line);padding:56px 0 40px}
+  .foot-in{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px}
+  .foot-links{display:flex;gap:26px;font-family:"Space Grotesk";font-size:.9rem;color:var(--muted)}
+  .foot-links a:hover{color:var(--text)}
+  .foot-bottom{margin-top:28px;padding-top:22px;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:960px){
+    .nav-in{padding:16px 22px}.wrap{padding:0 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--space-2);flex-direction:column;
+      justify-content:center;gap:28px;transform:translateX(100%);transition:transform .4s ease;z-index:55}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block;z-index:60}
+    header{padding:120px 0 40px}
+    .hero-grid,.visit-grid{grid-template-columns:1fr;gap:40px}
+    .system-wrap{order:-1}
+    .system{transform:scale(.56);margin:-140px 0}
+    .sys-cap{display:none}
+    .stats-inner{grid-template-columns:1fr 1fr;gap:32px 20px}
+    .stat+.stat::before{display:none}
+    section{padding:70px 0}
+    .pl-grid{grid-template-columns:1fr 1fr}
+    .show-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:420px){.pl-grid{grid-template-columns:1fr 1fr}}
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .orbit,.sun{animation:none!important}
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="brand"><span class="orb"></span>Starloom</div>
+    <div class="nav-links" id="navlinks">
+      <a href="#planets">The planets</a>
+      <a href="#shows">What's on</a>
+      <a href="#visit">Visit</a>
+      <a href="#tickets" class="cta">Book tickets</a>
+    </div>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero-grid">
+    <div class="hero-l">
+      <span class="eyebrow">Planetarium &amp; Space Centre</span>
+      <h1>Step inside<br>the <em>night sky.</em></h1>
+      <p>Under our 18-metre dome, the whole solar system swings overhead. Come chase planets, drift through nebulae, and see the stars the way our ancestors did — no light pollution required.</p>
+      <div class="hero-cta">
+        <a href="#tickets" class="btn btn-amber">Book a show</a>
+        <a href="#planets" class="btn btn-ghost">Explore the planets</a>
+      </div>
+    </div>
+    <div class="system-wrap reveal">
+      <div class="system" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="orbit o-me"><span class="planet p-me"></span></div>
+        <div class="orbit o-ve"><span class="planet p-ve"></span></div>
+        <div class="orbit o-ea"><span class="planet p-ea"></span></div>
+        <div class="orbit o-ma"><span class="planet p-ma"></span></div>
+        <div class="orbit o-ju"><span class="planet p-ju"></span></div>
+        <div class="orbit o-sa"><span class="planet p-sa"></span></div>
+        <div class="orbit o-ur"><span class="planet p-ur"></span></div>
+        <div class="orbit o-ne"><span class="planet p-ne"></span></div>
+      </div>
+      <p class="sys-cap">Our solar system — live, and roughly to speed</p>
+    </div>
+  </div>
+</header>
+
+<div class="stats-band">
+  <div class="wrap">
+    <div class="stats-inner">
+      <div class="stat reveal"><div class="n">18m</div><div class="l">Full-dome theatre</div></div>
+      <div class="stat reveal"><div class="n">9,000</div><div class="l">Stars projected</div></div>
+      <div class="stat reveal"><div class="n">4</div><div class="l">Shows every day</div></div>
+      <div class="stat reveal"><div class="n">1998</div><div class="l">Stargazing since</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PLANETS -->
+<section id="planets">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">A tour of the neighbourhood</span>
+      <h2>Eight worlds, one afternoon.</h2>
+      <p>Our exhibit floor takes you planet by planet — scaled models, real meteorites you can touch, and a few facts that never stop being strange.</p>
+    </div>
+    <div class="pl-grid">
+      <div class="pcard reveal"><div class="disc" style="background:radial-gradient(circle at 35% 30%,#e08262,#a8412a)"></div><h3>Mars</h3><div class="meta">The red planet</div><p>Home to the tallest volcano in the solar system — three times the height of Everest.</p></div>
+      <div class="pcard reveal"><div class="disc" style="background:radial-gradient(circle at 35% 30%,#f0cfa0,#d9a86b 55%,#b07f4a)"></div><h3>Jupiter</h3><div class="meta">The giant</div><p>So large that all the other planets could fit inside it — with room to spare.</p></div>
+      <div class="pcard reveal"><div class="disc" style="background:radial-gradient(circle at 35% 30%,#f4e6bf,#e3c893 55%,#c2a066)"></div><h3>Saturn</h3><div class="meta">The ringed one</div><p>Its rings are mostly ice, yet only about ten metres thick in places.</p></div>
+      <div class="pcard reveal"><div class="disc" style="background:radial-gradient(circle at 35% 30%,#8fa2e8,#5b73d6 60%,#3f52ad)"></div><h3>Neptune</h3><div class="meta">The far blue</div><p>Winds here scream past at over 2,000 km/h — the fastest in the solar system.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWS -->
+<section id="shows" class="shows">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">On the dome today</span>
+      <h2>What's on</h2>
+      <p>Live presenter-led shows and full-dome films, running throughout the day. Seats recline — do try not to fall asleep under the stars.</p>
+    </div>
+    <div class="show-grid">
+      <div class="show reveal"><div class="time">11:00<small>40 min</small></div><div><h3>A Sky Full of Stars</h3><div class="tags">All ages · Full-dome film</div><p>A gentle journey from our own backyard sky out to the edge of the observable universe.</p></div></div>
+      <div class="show reveal"><div class="time">13:00<small>25 min</small></div><div><h3>Little Astronomers</h3><div class="tags">Ages 3–6 · Interactive</div><p>A playful first trip to the Moon and back, made for our smallest explorers.</p></div></div>
+      <div class="show reveal"><div class="time">15:00<small>30 min</small></div><div><h3>Journey to the Edge</h3><div class="tags">Ages 8+ · Full-dome film</div><p>Ride alongside real spacecraft to the outer planets and the icy worlds beyond.</p></div></div>
+      <div class="show reveal"><div class="time">19:30<small>45 min</small></div><div><h3>Live Night Sky Tour</h3><div class="tags">Ages 10+ · Presenter-led</div><p>An astronomer walks you through tonight's real sky, then opens the floor to questions.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="eyebrow">Plan your visit</span>
+      <h2 class="grotesk" style="font-size:clamp(1.9rem,3.6vw,2.7rem);font-weight:700;margin:14px 0 22px;line-height:1.05">Find us under<br>the dome.</h2>
+      <div class="info-row"><span>Tuesday – Friday</span><span>10:00 – 17:00</span></div>
+      <div class="info-row"><span>Saturday – Sunday</span><span>10:00 – 21:00</span></div>
+      <div class="info-row"><span>Monday</span><span>Closed</span></div>
+      <div class="info-row"><span>Where</span><span>3 Observatory Hill, Meridian Park</span></div>
+      <div class="info-row"><span>Getting here</span><span>Free parking · Bus 12 &amp; 40</span></div>
+    </div>
+    <div id="tickets" class="tickets reveal">
+      <h3>Tickets</h3>
+      <div class="trow"><div><div class="grotesk">Adult</div><span class="sub">One show + exhibit floor</span></div><div class="pr">$16</div></div>
+      <div class="trow"><div><div class="grotesk">Child (3–15)</div><span class="sub">Under 3s free</span></div><div class="pr">$10</div></div>
+      <div class="trow"><div><div class="grotesk">Family</div><span class="sub">2 adults + 2 children</span></div><div class="pr">$44</div></div>
+      <div class="trow" style="border-bottom:none"><div><div class="grotesk">Annual pass</div><span class="sub">Unlimited shows, all year</span></div><div class="pr">$60</div></div>
+      <a href="#" class="btn btn-amber" style="width:100%;text-align:center;margin-top:24px">Book now</a>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL -->
+<section class="final">
+  <div class="wrap reveal">
+    <span class="eyebrow">Clear skies ahead</span>
+    <h2 style="margin-top:16px">The universe is <em>closer</em> than you think.</h2>
+    <p>Grab a seat under the dome this weekend and let the cosmos come to you.</p>
+    <a href="#tickets" class="btn btn-amber">Book your seat</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-in">
+      <div class="brand"><span class="orb"></span>Starloom</div>
+      <div class="foot-links">
+        <a href="#shows">What's on</a>
+        <a href="#visit">Visit</a>
+        <a href="#">Schools</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2025 Starloom Planetarium &amp; Space Centre — Demo site for portfolio use.</div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>30);
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

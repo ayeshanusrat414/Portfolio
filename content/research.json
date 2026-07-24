@@ -1,0 +1,20 @@
+{
+  "items": [
+    {
+      "title": "Failure Modes & Recovery in LLM Tool-Calling Pipelines",
+      "abstract": "MSc research investigating how large language model tool-calling pipelines fail in practice, and designing detection and recovery strategies to make agentic systems more reliable.",
+      "technologies": ["Python", "LLM Agents", "Tool-Calling", "Evaluation"],
+      "status": "In Progress",
+      "publications": ["MSc Thesis, UET (2025–2027)"],
+      "futureWork": "Extending the failure taxonomy to long-horizon tasks and evaluating automated self-correction loops."
+    },
+    {
+      "title": "3D-CNN Facial Recognition for Smart Access Control",
+      "abstract": "A 3D Convolutional Neural Network for authenticating registered users to unlock doors, developed as the smart-door module of an AI home automation system.",
+      "technologies": ["Machine Learning", "3D-CNN", "C#", "Android"],
+      "status": "Published",
+      "publications": ["Final Year Project, PUCIT (2020)"],
+      "futureWork": "Improving robustness under low-light and spoofing conditions, and on-device inference."
+    }
+  ]
+}

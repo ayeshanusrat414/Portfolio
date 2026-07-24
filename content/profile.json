@@ -1,0 +1,38 @@
+{
+  "name": "Ayesha Nusrat",
+  "roles": [
+    "Senior Software Engineer",
+    "Full Stack Developer",
+    "AI Engineer",
+    "UI & Graphic Designer"
+  ],
+  "tagline": "I build scalable .NET and Angular platforms, AI-powered products \u2014 and design the interfaces and brands around them.",
+  "intro": "Senior Software Engineer with 5+ years building high-traffic, enterprise-grade web applications across .NET Core, ASP.NET, Angular and SQL Server. Currently pursuing an MSc in Artificial Intelligence focused on LLM tool-calling pipelines. Alongside engineering, I design book covers, brand identities, posters and full website concepts \u2014 so I can take a product from idea to interface to shipped code.",
+  "location": "Lahore, Pakistan",
+  "email": "ayeshanusrat414@gmail.com",
+  "resumeUrl": "/resume.pdf",
+  "avatar": "/profile/avatar.jpg",
+  "social": {
+    "github": "https://github.com/ayeshanusrat",
+    "linkedin": "https://linkedin.com/in/ayesha-nusrat-a8b585220"
+  },
+  "seo": {
+    "siteUrl": "https://ayeshanusrat.com",
+    "title": "Ayesha Nusrat \u2014 Software & AI Engineer",
+    "description": "Portfolio of Ayesha Nusrat, a Senior Software Engineer specializing in .NET Core, ASP.NET, Angular, SQL Server and AI/LLM systems.",
+    "keywords": [
+      "Ayesha Nusrat",
+      "Senior Software Engineer",
+      "Full Stack Developer",
+      "AI Engineer",
+      ".NET Core",
+      "ASP.NET",
+      "Angular",
+      "SQL Server",
+      "LLM",
+      "Portfolio"
+    ],
+    "ogImage": "/profile/og.jpg",
+    "twitterHandle": "@ayeshanusrat"
+  }
+}

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thornmill Coffee — Neighbourhood Coffee Bar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#e8ede0;
+    --cream-2:#dde5d1;
+    --card:#f2f6ec;
+    --cocoa:#382a20;
+    --cocoa-2:#4a3729;
+    --teal:#2f8079;
+    --teal-deep:#245f59;
+    --teal-soft:#daeae7;
+    --clay:#cf8a5c;
+    --ink:#382a20;
+    --ink-2:#655345;
+    --muted:#93826f;
+    --line:#e5d9c4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:"DM Sans",system-ui,sans-serif;background:var(--cream);color:var(--ink);
+    line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  .head{font-family:"Poppins",sans-serif;font-weight:700;line-height:1.05;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 42px}
+  .ey{font-family:"Poppins";font-weight:600;text-transform:uppercase;letter-spacing:.18em;font-size:.72rem;color:var(--teal-deep)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:60;transition:background .35s,padding .35s,box-shadow .35s}
+  .nav-in{max-width:1180px;margin:0 auto;padding:22px 42px;display:flex;align-items:center;justify-content:space-between;transition:padding .35s}
+  nav.scrolled{background:rgba(245,238,225,.93);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line)}
+  nav.scrolled .nav-in{padding:14px 42px}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Poppins";font-weight:700;font-size:1.25rem;color:var(--cocoa)}
+  .brand .dot{width:26px;height:26px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;flex:none}
+  .brand .dot::after{content:"";width:9px;height:11px;background:var(--cream);border-radius:50% 50% 50% 50%/60% 60% 40% 40%}
+  .nav-links{display:flex;gap:32px;align-items:center}
+  .nav-links a{font-weight:500;font-size:.92rem;color:var(--ink-2);transition:color .2s}
+  .nav-links a:hover{color:var(--cocoa)}
+  .nav-links a.order{background:var(--teal);color:#fff!important;padding:10px 20px;border-radius:100px;font-weight:600}
+  .nav-links a.order:hover{background:var(--teal-deep)}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--cocoa)}
+
+  /* HERO */
+  header{padding:150px 0 60px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:40px;align-items:center}
+  .hero-l .ey{display:inline-block;margin-bottom:20px}
+  header h1{font-family:"Poppins";font-weight:700;font-size:clamp(2.9rem,6.6vw,5.3rem);line-height:1.0;letter-spacing:-.03em;color:var(--cocoa)}
+  header h1 em{font-style:normal;color:var(--teal)}
+  .hero-l p{max-width:40ch;margin-top:20px;font-size:1.12rem;color:var(--ink-2)}
+  .hero-cta{display:flex;gap:14px;margin-top:30px;flex-wrap:wrap;align-items:center}
+  .btn{display:inline-block;font-family:"Poppins";font-weight:600;font-size:.92rem;padding:14px 28px;border-radius:100px;cursor:pointer;
+    transition:transform .22s,background .25s,color .25s,box-shadow .25s;border:2px solid var(--cocoa)}
+  .btn-fill{background:var(--cocoa);color:var(--cream);box-shadow:0 14px 30px -14px rgba(56,42,32,.5)}
+  .btn-fill:hover{background:var(--teal-deep);border-color:var(--teal-deep);transform:translateY(-2px)}
+  .btn-line{background:transparent;color:var(--cocoa)}
+  .btn-line:hover{background:var(--cocoa);color:var(--cream)}
+  .hero-tags{display:flex;gap:10px;margin-top:26px;flex-wrap:wrap}
+  .hero-tags span{font-size:.8rem;font-weight:500;background:var(--card);border:1px solid var(--line);padding:7px 14px;border-radius:100px;color:var(--ink-2)}
+
+  /* CSS cup */
+  .cup-scene{position:relative;width:100%;height:340px;display:flex;align-items:center;justify-content:center}
+  .cup-bg{position:absolute;width:300px;height:300px;border-radius:50%;background:var(--teal-soft)}
+  .cup-bg::after{content:"";position:absolute;inset:26px;border:2px dashed rgba(47,128,121,.35);border-radius:50%}
+  .hero-photo{position:relative;z-index:2;width:270px;height:270px;border-radius:50%;background:var(--cream-2);
+    background-size:cover;background-position:center;border:8px solid var(--card);box-shadow:0 30px 60px -26px rgba(56,42,32,.5)}
+  .mug{position:relative;z-index:2;width:150px;height:132px;background:linear-gradient(180deg,#fff,#f1e7d6);
+    border:7px solid var(--cocoa);border-radius:16px 16px 46px 46px;box-shadow:0 26px 44px -22px rgba(56,42,32,.5)}
+  .mug .coffee{position:absolute;left:9px;right:9px;top:9px;height:24px;background:var(--cocoa);border-radius:10px 10px 6px 6px}
+  .mug .handle{position:absolute;right:-42px;top:28px;width:42px;height:56px;border:7px solid var(--cocoa);border-left:none;border-radius:0 34px 34px 0}
+  .saucer{position:absolute;z-index:1;bottom:74px;width:220px;height:20px;background:var(--cocoa);border-radius:50%}
+  .steam{position:absolute;z-index:2;top:52px;display:flex;gap:16px}
+  .steam i{width:7px;height:46px;background:linear-gradient(var(--muted),transparent);border-radius:8px;opacity:0;transform-origin:bottom}
+  .steam i:nth-child(1){animation:steam 3s ease-in-out infinite}
+  .steam i:nth-child(2){animation:steam 3s ease-in-out .6s infinite}
+  .steam i:nth-child(3){animation:steam 3s ease-in-out 1.2s infinite}
+  @keyframes steam{0%{opacity:0;transform:translateY(8px) scaleY(.7)}35%{opacity:.55}100%{opacity:0;transform:translateY(-20px) scaleY(1.25)}}
+
+  /* PHOTO BAND */
+  .band{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+  .band .b{height:260px;background:var(--cream-2);background-size:cover;background-position:center}
+
+  section{padding:100px 0}
+  .sec-head{max-width:600px;margin:0 auto 54px;text-align:center}
+  .sec-head .ey{display:block;margin-bottom:14px}
+  .sec-head h2{font-family:"Poppins";font-weight:700;font-size:clamp(2.1rem,4.6vw,3.4rem);color:var(--cocoa);letter-spacing:-.02em}
+  .sec-head p{color:var(--ink-2);margin-top:14px}
+
+  /* MENU as cards */
+  .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-bottom:44px}
+  .fcard{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+  .fcard:hover{transform:translateY(-6px);box-shadow:0 28px 54px -32px rgba(56,42,32,.45)}
+  .fcard .top{height:8px}
+  .fcard .in{padding:26px 26px 28px}
+  .fcard h3{font-family:"Poppins";font-weight:600;font-size:1.28rem;color:var(--cocoa);display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .fcard h3 .pr{font-size:1rem;color:var(--teal-deep)}
+  .fcard p{color:var(--ink-2);font-size:.92rem;margin-top:8px}
+  .fcard .badge{display:inline-block;margin-top:14px;font-family:"Poppins";font-size:.66rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--clay)}
+
+  .also{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:34px 40px}
+  .also h4{font-family:"Poppins";font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:20px}
+  .also-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 40px}
+  .aline{display:flex;align-items:baseline;gap:8px}
+  .aline .n{font-weight:500}
+  .aline .d{flex:1;border-bottom:1px dotted var(--line);transform:translateY(-4px)}
+  .aline .p{font-family:"Poppins";font-weight:600;font-size:.88rem;color:var(--teal-deep)}
+
+  /* ROASTERY */
+  .roast{background:var(--cocoa);color:var(--cream)}
+  .roast-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .roast-photo{aspect-ratio:4/3;border-radius:18px;background:var(--cocoa-2);background-size:cover;background-position:center;box-shadow:0 40px 80px -40px rgba(0,0,0,.6)}
+  .roast .ey{color:var(--clay)}
+  .roast h2{font-family:"Poppins";font-weight:700;font-size:clamp(2rem,4vw,3rem);margin:14px 0 20px;line-height:1.08;letter-spacing:-.02em}
+  .roast p{color:rgba(245,238,225,.8);margin-bottom:16px}
+  .roast .points{margin-top:24px;display:flex;flex-direction:column;gap:13px}
+  .roast .points div{display:flex;gap:13px;align-items:center;font-size:.98rem;color:rgba(245,238,225,.92)}
+  .roast .points .dot{width:9px;height:9px;border-radius:50%;background:var(--teal);flex:none}
+
+  /* GALLERY offset */
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:center}
+  .gtile{border-radius:16px;background:var(--cream-2);background-size:cover;background-position:center;height:260px;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+  .gtile.up{transform:translateY(-26px)}
+  .gtile:hover{transform:scale(1.02)}
+  .gtile.up:hover{transform:translateY(-26px) scale(1.02)}
+
+  /* VISIT */
+  .visit{background:var(--cream-2)}
+  .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .visit h2{font-family:"Poppins";font-weight:700;font-size:clamp(2rem,4vw,3rem);margin:14px 0 18px;line-height:1.05;color:var(--cocoa);letter-spacing:-.02em}
+  .visit p{color:var(--ink-2)}
+  .hrs{margin-top:22px}
+  .hrs .row{display:flex;justify-content:space-between;max-width:360px;padding:12px 0;border-bottom:1px solid var(--line);font-size:.96rem}
+  .hrs .row span:last-child{color:var(--muted)}
+  .map-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:36px;box-shadow:0 30px 60px -40px rgba(56,42,32,.4)}
+  .map-card .big{font-family:"Poppins";font-weight:700;font-size:1.5rem;margin-bottom:6px;color:var(--cocoa)}
+  .map-card .addr{color:var(--ink-2);margin-bottom:20px}
+  .map-card .btn{width:100%;text-align:center;margin-top:8px}
+
+  footer{background:var(--cocoa);color:rgba(245,238,225,.72);padding:64px 0 36px}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:44px;padding-bottom:40px;border-bottom:1px solid rgba(245,238,225,.14)}
+  .foot-brand{display:flex;align-items:center;gap:10px;font-family:"Poppins";font-weight:700;font-size:1.4rem;color:var(--cream)}
+  .foot-brand .dot{width:22px;height:22px;border-radius:50%;background:var(--teal);flex:none}
+  .foot-grid>div>p{margin-top:13px;font-size:.94rem;max-width:32ch}
+  .foot-col h4{font-family:"Poppins";text-transform:uppercase;letter-spacing:.14em;font-size:.7rem;color:var(--clay);margin-bottom:15px;font-weight:600}
+  .foot-col a,.foot-col p{display:block;margin:0 0 9px;font-size:.94rem;transition:color .2s}
+  .foot-col a:hover{color:var(--cream)}
+  .foot-bottom{padding-top:24px;font-size:.8rem;opacity:.6}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .nav-in{padding:16px 22px}.wrap{padding:0 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:78%;max-width:320px;background:var(--cream);flex-direction:column;
+      justify-content:center;gap:26px;transform:translateX(100%);transition:transform .4s ease;z-index:55}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block;z-index:60}
+    header{padding:120px 0 40px}
+    section{padding:64px 0}
+    .hero-grid,.roast-grid,.visit-grid{grid-template-columns:1fr;gap:36px}
+    .cup-scene{order:-1;height:280px}
+    .band{grid-template-columns:1fr}
+    .band .b{height:210px}
+    .feat-grid,.also-grid,.gal{grid-template-columns:1fr;gap:16px}
+    .gtile{height:220px}.gtile.up{transform:none}.gtile.up:hover{transform:scale(1.02)}
+    .foot-grid{grid-template-columns:1fr;gap:30px}
+  }
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.reveal{opacity:1;transform:none;transition:none}.steam i{animation:none!important;opacity:.3}.gtile{transition:none}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="brand"><span class="dot"></span>Thornmill</div>
+    <div class="nav-links" id="navlinks">
+      <a href="#menu">Menu</a>
+      <a href="#roastery">Roastery</a>
+      <a href="#visit">Visit</a>
+      <a href="#visit" class="order">Order ahead</a>
+    </div>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap hero-grid">
+    <div class="hero-l">
+      <span class="ey">Neighbourhood coffee bar</span>
+      <h1>Good coffee &amp; a <em>warm corner</em> to sit in.</h1>
+      <p>Slow-poured coffee, fresh bakes, and a comfy seat by the window. No rush — stay as long as you like.</p>
+      <div class="hero-cta">
+        <a href="#menu" class="btn btn-fill">See the menu</a>
+        <a href="#visit" class="btn btn-line">Find us</a>
+      </div>
+      <div class="hero-tags"><span>☕ Small-batch roasted</span><span>🥐 Baked daily</span><span>🌱 Oat · almond · soy</span></div>
+    </div>
+    <div class="hero-r">
+      <div class="cup-scene">
+        <div class="cup-bg"></div>
+        <div class="hero-photo" style="background-image:url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?w=600&q=80&auto=format&fit=crop')"></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- PHOTO BAND -->
+<div class="band reveal">
+  <div class="b" style="background-image:url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?w=800&q=80&auto=format&fit=crop')"></div>
+  <div class="b" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80&auto=format&fit=crop')"></div>
+  <div class="b" style="background-image:url('https://images.unsplash.com/photo-1588253137728-1e4dd0fe9a93?w=800&q=80&auto=format&fit=crop')"></div>
+</div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="ey">What's brewing</span>
+      <h2>House favourites</h2>
+      <p>Made to order — swap in oat, almond, or soy for free.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="fcard reveal"><div class="top" style="background:var(--teal)"></div><div class="in"><h3>Maple Oat Latte <span class="pr">Rs 480</span></h3><p>Double shot, steamed oat milk, a drizzle of real maple.</p><span class="badge">Most ordered</span></div></div>
+      <div class="fcard reveal"><div class="top" style="background:var(--clay)"></div><div class="in"><h3>Honey Cortado <span class="pr">Rs 420</span></h3><p>Equal parts espresso and milk, a spoon of local honey.</p><span class="badge">Barista's pick</span></div></div>
+      <div class="fcard reveal"><div class="top" style="background:var(--cocoa)"></div><div class="in"><h3>Iced Dark Mocha <span class="pr">Rs 500</span></h3><p>Cold brew, dark chocolate, milk, over a lot of ice.</p><span class="badge">Summer favourite</span></div></div>
+    </div>
+    <div class="also reveal">
+      <h4>Also on the menu</h4>
+      <div class="also-grid">
+        <div class="aline"><span class="n">Espresso</span><span class="d"></span><span class="p">Rs 250</span></div>
+        <div class="aline"><span class="n">Flat White</span><span class="d"></span><span class="p">Rs 420</span></div>
+        <div class="aline"><span class="n">Cappuccino</span><span class="d"></span><span class="p">Rs 400</span></div>
+        <div class="aline"><span class="n">Cold Brew</span><span class="d"></span><span class="p">Rs 450</span></div>
+        <div class="aline"><span class="n">Hot Chocolate</span><span class="d"></span><span class="p">Rs 430</span></div>
+        <div class="aline"><span class="n">Matcha Latte</span><span class="d"></span><span class="p">Rs 490</span></div>
+        <div class="aline"><span class="n">Butter Croissant</span><span class="d"></span><span class="p">Rs 300</span></div>
+        <div class="aline"><span class="n">Banana Bread</span><span class="d"></span><span class="p">Rs 320</span></div>
+        <div class="aline"><span class="n">Cinnamon Roll</span><span class="d"></span><span class="p">Rs 350</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROASTERY -->
+<section id="roastery" class="roast">
+  <div class="wrap roast-grid">
+    <div class="reveal">
+      <span class="ey">Our roastery</span>
+      <h2>Roasted here, a few kilos at a time.</h2>
+      <p>We roast twice a week in small batches, so what's in your cup is never more than a few days off the roaster.</p>
+      <p>Our green beans come from growers we know and pay fairly — good coffee shouldn't cost someone else too much.</p>
+      <div class="points">
+        <div><span class="dot"></span>Roasted fresh, twice a week</div>
+        <div><span class="dot"></span>Directly &amp; fairly sourced</div>
+        <div><span class="dot"></span>Beans to take home, whole or ground</div>
+      </div>
+    </div>
+    <div class="roast-photo reveal" style="background-image:url('https://images.unsplash.com/photo-1545418314-7ce0b9b53901?w=1000&q=80&auto=format&fit=crop')"></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="ey">The room</span>
+      <h2>Come sit a while</h2>
+    </div>
+    <div class="gal reveal">
+      <div class="gtile" style="background-image:url('https://images.unsplash.com/photo-1651783976258-3072215aac82?w=700&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile up" style="background-image:url('https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?w=700&q=80&auto=format&fit=crop')"></div>
+      <div class="gtile" style="background-image:url('https://images.unsplash.com/photo-1598959652545-c0230cdbb01f?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- VISIT -->
+<section id="visit" class="visit">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="ey">Come say hi</span>
+      <h2>The little place with the teal door.</h2>
+      <p>You'll smell the fresh coffee before you see us — right on the corner of Harper Lane.</p>
+      <div class="hrs">
+        <div class="row"><span>Monday – Friday</span><span>7:00am – 7:00pm</span></div>
+        <div class="row"><span>Saturday</span><span>8:00am – 8:00pm</span></div>
+        <div class="row"><span>Sunday</span><span>8:00am – 4:00pm</span></div>
+      </div>
+    </div>
+    <div class="map-card reveal">
+      <div class="big">Thornmill Coffee</div>
+      <div class="addr">8 Harper Lane<br>Old Town</div>
+      <div class="hrs" style="margin-top:0">
+        <div class="row"><span>Phone</span><span>+00 000 000 0000</span></div>
+        <div class="row"><span>Email</span><span>hello@thornmill.example</span></div>
+      </div>
+      <a href="#" class="btn btn-fill">Order ahead</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span class="dot"></span>Thornmill Coffee</div>
+        <p>A neighbourhood coffee bar. Come for the coffee, stay for the quiet.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Visit</h4>
+        <p>8 Harper Lane<br>Old Town</p>
+        <p>hello@thornmill.example</p>
+      </div>
+      <div class="foot-col">
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">Facebook</a>
+        <a href="#">Our beans</a>
+      </div>
+    </div>
+    <div class="foot-bottom">© 2025 Thornmill Coffee — Demo site for portfolio use.</div>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>50);
+  window.addEventListener('scroll',onScroll);onScroll();
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marrowfield Studio — Architecture &amp; Interior Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f5f4f0;
+    --paper-2:#eceae3;
+    --ink:#17160f;
+    --ink-2:#3b382f;
+    --grey:#8b877c;
+    --line:#d9d5cb;
+    --slate:#3f5a6b;      /* whisper accent */
+    --slate-bright:#5c7d90;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter",system-ui,sans-serif;background:var(--paper);color:var(--ink);
+    line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  }
+  .display{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.03em;line-height:.98}
+  .mono{font-family:"Space Mono",monospace}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px}
+  .label{font-family:"Space Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--slate)}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,244,240,.82);
+      backdrop-filter:blur(10px);border-bottom:1px solid transparent;transition:border-color .3s}
+  nav.scrolled{border-color:var(--line)}
+  .nav-in{max-width:1240px;margin:0 auto;padding:20px 40px;display:flex;align-items:center;justify-content:space-between}
+  .brand{display:flex;align-items:baseline;gap:8px}
+  .brand b{font-family:"Archivo";font-weight:800;font-size:1.3rem;letter-spacing:-.02em}
+  .brand span{font-family:"Space Mono";font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:var(--grey)}
+  .nav-links{display:flex;gap:36px;align-items:center}
+  .nav-links a{font-size:.86rem;font-weight:500;color:var(--ink-2);transition:color .25s}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a.contact{font-family:"Space Mono";font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+    border:1px solid var(--ink);padding:9px 16px;transition:background .3s,color .3s}
+  .nav-links a.contact:hover{background:var(--ink);color:var(--paper)}
+  .nav-toggle{display:none;background:none;border:0;font-size:1.4rem;cursor:pointer;color:var(--ink)}
+
+  /* HERO */
+  header{padding:170px 0 70px}
+  .hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:44px;flex-wrap:wrap}
+  .hero-top .label{max-width:30ch;line-height:1.7}
+  header h1{font-family:"Archivo";font-weight:800;letter-spacing:-.035em;line-height:.94;
+    font-size:clamp(2.8rem,8.4vw,7.6rem)}
+  header h1 .thin{font-weight:400;font-style:normal;color:var(--grey)}
+  .hero-img{margin-top:52px;height:min(58vh,540px);background:var(--paper-2);
+    background-image:url("https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=1900&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center 60%}
+  .hero-foot{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;margin-top:30px}
+  .hero-foot .col p{font-size:.92rem;color:var(--ink-2);max-width:32ch}
+  .hero-foot .col .label{display:block;margin-bottom:10px}
+
+  /* INTRO STATEMENT */
+  .statement{padding:110px 0;border-top:1px solid var(--line)}
+  .statement .lead{font-family:"Archivo";font-weight:500;letter-spacing:-.01em;
+    font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.24;max-width:20ch}
+  .statement-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:60px;align-items:start}
+  .statement-grid .right p{color:var(--ink-2);margin-bottom:18px;font-size:1.02rem}
+  .statement-grid .right p:first-child{font-weight:500;color:var(--ink)}
+
+  /* WORKS (signature index) */
+  .works{padding:100px 0;border-top:1px solid var(--line)}
+  .works-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px}
+  .works-head h2{font-family:"Archivo";font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em}
+  .project{display:grid;grid-template-columns:64px 1fr auto auto;gap:26px;align-items:center;
+    padding:30px 6px;border-top:1px solid var(--line);position:relative;transition:padding-left .35s ease}
+  .project:last-child{border-bottom:1px solid var(--line)}
+  .project .num{font-family:"Space Mono";font-size:.9rem;color:var(--slate)}
+  .project .pname{font-family:"Archivo";font-weight:600;font-size:clamp(1.3rem,2.6vw,2rem);letter-spacing:-.02em;transition:transform .35s ease}
+  .project .ptype{font-size:.9rem;color:var(--ink-2)}
+  .project .pyear{font-family:"Space Mono";font-size:.85rem;color:var(--grey)}
+  .project .thumb{position:absolute;right:150px;top:50%;transform:translateY(-50%) scale(.96);
+    width:230px;height:150px;background-size:cover;background-position:center;
+    opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s ease;box-shadow:0 30px 60px -30px rgba(0,0,0,.4);z-index:2}
+  .project:hover{padding-left:20px}
+  .project:hover .pname{transform:translateX(2px)}
+  .project:hover .thumb{opacity:1;transform:translateY(-50%) scale(1)}
+
+  /* SERVICES */
+  .services{padding:100px 0;border-top:1px solid var(--line)}
+  .services-grid{display:grid;grid-template-columns:0.7fr 1.3fr;gap:60px;align-items:start}
+  .services h2{font-family:"Archivo";font-weight:700;font-size:clamp(1.6rem,3vw,2.2rem);letter-spacing:-.02em}
+  .srv{padding:26px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:52px 1fr;gap:20px}
+  .srv:first-of-type{border-top:0;padding-top:0}
+  .srv .snum{font-family:"Space Mono";font-size:.78rem;color:var(--slate)}
+  .srv h3{font-family:"Archivo";font-weight:600;font-size:1.32rem;letter-spacing:-.01em;margin-bottom:8px}
+  .srv p{color:var(--ink-2);font-size:.98rem;max-width:52ch}
+
+  /* ABOUT */
+  .about{padding:100px 0;border-top:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .about-img{aspect-ratio:5/4;background:var(--paper-2);
+    background-image:url("https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=1200&q=80&auto=format&fit=crop");
+    background-size:cover;background-position:center}
+  .about-body h2{font-family:"Archivo";font-weight:700;font-size:clamp(1.8rem,3.4vw,2.7rem);letter-spacing:-.02em;margin:14px 0 22px;line-height:1.05}
+  .about-body p{color:var(--ink-2);margin-bottom:16px}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:36px;border-top:1px solid var(--line);padding-top:30px}
+  .stats .n{font-family:"Archivo";font-weight:800;font-size:2.4rem;letter-spacing:-.03em}
+  .stats .s{font-family:"Space Mono";font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-top:4px}
+
+  /* CONTACT */
+  .contact{padding:120px 0;border-top:1px solid var(--line);background:var(--ink);color:var(--paper)}
+  .contact .label{color:var(--slate-bright)}
+  .contact h2{font-family:"Archivo";font-weight:800;letter-spacing:-.03em;font-size:clamp(2.4rem,6vw,5rem);
+    line-height:.98;margin:20px 0 40px;max-width:16ch}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;border-top:1px solid rgba(255,255,255,.14);padding-top:40px}
+  .contact-grid h4{font-family:"Space Mono";font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--slate-bright);margin-bottom:14px}
+  .contact-grid p,.contact-grid a{display:block;color:rgba(245,244,240,.82);font-size:.98rem;margin-bottom:8px;transition:color .25s}
+  .contact-grid a:hover{color:var(--paper)}
+  .mailbtn{display:inline-block;margin-top:6px;font-family:"Space Mono";font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+    border:1px solid rgba(245,244,240,.4);padding:14px 26px;color:var(--paper)!important;transition:background .3s,color .3s,border-color .3s}
+  .mailbtn:hover{background:var(--paper);color:var(--ink)!important;border-color:var(--paper)}
+
+  footer{background:var(--ink);color:rgba(245,244,240,.5);padding:0 0 40px}
+  .foot-in{max-width:1240px;margin:0 auto;padding:30px 40px 0;border-top:1px solid rgba(255,255,255,.12);
+    display:flex;justify-content:space-between;font-family:"Space Mono";font-size:.74rem;letter-spacing:.08em;flex-wrap:wrap;gap:12px}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:900px){
+    .nav-in,.foot-in{padding-left:22px;padding-right:22px}
+    .wrap{padding:0 22px}
+    .nav-links{position:fixed;inset:0 0 0 auto;width:76%;max-width:320px;background:var(--paper);
+      flex-direction:column;justify-content:center;gap:26px;transform:translateX(100%);
+      transition:transform .4s ease;box-shadow:-20px 0 60px rgba(0,0,0,.15);border-left:1px solid var(--line)}
+    .nav-links.open{transform:none}
+    .nav-toggle{display:block;z-index:60}
+    header{padding:130px 0 50px}
+    .statement,.works,.services,.about,.contact{padding:70px 0}
+    .statement-grid,.services-grid,.about-grid{grid-template-columns:1fr;gap:34px}
+    .hero-foot{grid-template-columns:1fr;gap:20px}
+    .project{grid-template-columns:44px 1fr;gap:14px;padding:22px 4px;row-gap:4px}
+    .project .ptype{grid-column:2}
+    .project .pyear{grid-column:2}
+    .project .thumb{display:none}
+    .project:hover{padding-left:4px}
+    .about-img{aspect-ratio:4/3}
+    .stats .n{font-size:1.9rem}
+    .contact-grid{grid-template-columns:1fr;gap:26px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .project,.project .thumb,.project .pname{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-in">
+    <div class="brand"><b>Marrowfield</b><span>Studio</span></div>
+    <div class="nav-links" id="navlinks">
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#about">Studio</a>
+      <a href="#contact" class="contact">Contact</a>
+    </div>
+    <button class="nav-toggle" id="navtoggle" aria-label="Menu">☰</button>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="label">Architecture &amp; interior design<br>Working across homes, workspaces &amp; hospitality</div>
+      <div class="label">Est. 2016 — Practising in three countries</div>
+    </div>
+    <h1>We design<br>spaces that <span class="thin">age well.</span></h1>
+    <div class="hero-img reveal"></div>
+    <div class="hero-foot">
+      <div class="col"><span class="label">What we do</span><p>Full-service architecture and interiors, from first sketch to the final light fitting.</p></div>
+      <div class="col"><span class="label">How we work</span><p>Small teams, long timelines, and a bias toward materials that improve with use.</p></div>
+      <div class="col"><span class="label">Who we're for</span><p>Owners and operators building something they intend to keep for a long time.</p></div>
+    </div>
+  </div>
+</header>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap statement-grid">
+    <div class="left reveal">
+      <p class="lead">Good design is quiet. It earns attention slowly.</p>
+    </div>
+    <div class="right reveal">
+      <p>Marrowfield is a studio of architects and interior designers who believe a building is only finished once people have lived in it for a while.</p>
+      <p>We start every project by understanding how a space will actually be used — the morning light, the way people move through a room, the wear a floor takes over ten years. Then we design backward from there.</p>
+      <p>The result is work that doesn't chase trends: rooms that feel calm on day one and better on day one thousand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="works">
+  <div class="wrap">
+    <div class="works-head reveal">
+      <h2>Selected work</h2>
+      <span class="label">2022 — 2024</span>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">01</div>
+      <div class="pname">Hollow House</div>
+      <div class="ptype">Private residence</div>
+      <div class="pyear">2024</div>
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">02</div>
+      <div class="pname">Meridian Offices</div>
+      <div class="ptype">Workspace</div>
+      <div class="pyear">2023</div>
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">03</div>
+      <div class="pname">The Glasshouse</div>
+      <div class="ptype">Hospitality</div>
+      <div class="pyear">2024</div>
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+
+    <div class="project reveal">
+      <div class="num">04</div>
+      <div class="pname">Cedar &amp; Stone</div>
+      <div class="ptype">Residential — 12 apartments</div>
+      <div class="pyear">2023</div>
+      <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=700&q=80&auto=format&fit=crop')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+  <div class="wrap services-grid">
+    <div class="reveal"><span class="label">Capabilities</span><h2 style="margin-top:14px">What we offer</h2></div>
+    <div class="reveal">
+      <div class="srv">
+        <div class="snum">01</div>
+        <div><h3>Architecture</h3><p>Ground-up buildings and renovations — concept design, planning, technical drawings, and site oversight through to completion.</p></div>
+      </div>
+      <div class="srv">
+        <div class="snum">02</div>
+        <div><h3>Interior design</h3><p>Layouts, materials, joinery, and lighting designed as one whole, so the inside and the architecture speak the same language.</p></div>
+      </div>
+      <div class="srv">
+        <div class="snum">03</div>
+        <div><h3>Spatial strategy</h3><p>For owners and operators — how a space should work before it's built, from flow and capacity to how it will be run day to day.</p></div>
+      </div>
+      <div class="srv">
+        <div class="snum">04</div>
+        <div><h3>Furnishing &amp; styling</h3><p>Furniture, fixtures, and finishing — specified and sourced, so the finished room is ready to live in, not just to look at.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="wrap about-grid">
+    <div class="about-img reveal"></div>
+    <div class="about-body reveal">
+      <span class="label">The studio</span>
+      <h2>A small practice, by choice.</h2>
+      <p>We keep the studio deliberately small so that the people you meet at the first sketch are the same people on site at the end. No hand-offs, no house style pushed onto every brief.</p>
+      <p>Founded in 2016, Marrowfield works across private homes, workspaces, and hospitality, with a growing body of work led by a team that would rather do a few things properly than many things quickly.</p>
+      <div class="stats">
+        <div><div class="n">40+</div><div class="s">Projects delivered</div></div>
+        <div><div class="n">3</div><div class="s">Countries</div></div>
+        <div><div class="n">2016</div><div class="s">Founded</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="wrap">
+    <span class="label">Start a project</span>
+    <h2>Let's build something worth keeping.</h2>
+    <a class="mailbtn" href="#">studio@marrowfield.example</a>
+    <div class="contact-grid" style="margin-top:60px">
+      <div>
+        <h4>Studio</h4>
+        <p>Alderman Works<br>26 Kiln Street<br>Design District</p>
+      </div>
+      <div>
+        <h4>Enquiries</h4>
+        <a href="#">studio@marrowfield.example</a>
+        <a href="#">+00 000 000 0000</a>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+        <a href="#">Journal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <span>© 2025 Marrowfield Studio — Demo site for portfolio use</span>
+    <span>Architecture &amp; Interiors</span>
+  </div>
+</footer>
+
+<script>
+  const nav=document.getElementById('nav');
+  const onScroll=()=>nav.classList.toggle('scrolled',window.scrollY>20);
+  window.addEventListener('scroll',onScroll);onScroll();
+
+  const toggle=document.getElementById('navtoggle');
+  const links=document.getElementById('navlinks');
+  toggle.addEventListener('click',()=>links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "items": [
+    { "title": "IEEE Coding Competition Certificate", "organization": "IEEE — UET", "year": "2019", "image": "/logos/ieee.jpg" },
+    { "title": "81st Percentile in NAT", "organization": "National Testing Service", "year": "2020", "image": "/logos/nts.jpg" },
+    { "title": "Startup Incubation — Nspire", "organization": "Netsol Incubation Center", "year": "2020", "image": "/logos/nspire.jpg" },
+    { "title": "Plan9 Incubation Pitch", "organization": "Plan9, PITB", "year": "2020", "image": "/logos/plan9.jpg" }
+  ]
+}

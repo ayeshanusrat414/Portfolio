@@ -1,0 +1,13 @@
+{
+  "items": [
+    { "title": "Nettle & Char", "category": "Restaurant", "description": "Seasonal-plates restaurant site with a warm, editorial feel.", "file": "/sites/nettle-and-char.html", "accent": "#7c5e3b" },
+    { "title": "Marrowfield Studio", "category": "Architecture", "description": "Architecture & interior design studio — clean, gallery-led layout.", "file": "/sites/marrowfield-studio.html", "accent": "#4b4b4b" },
+    { "title": "Hollowfield", "category": "Fitness", "description": "Strength & conditioning gym with bold, high-energy design.", "file": "/sites/hollowfield-gym.html", "accent": "#c2410c" },
+    { "title": "Ashmere", "category": "Fashion", "description": "Fashion atelier — ready-to-wear & made-to-measure storefront.", "file": "/sites/ashmere-fashion.html", "accent": "#8a6d5a" },
+    { "title": "Daykeep", "category": "App / SaaS", "description": "A gentle daily-journal app landing page.", "file": "/sites/daykeep-app.html", "accent": "#4f7d6a" },
+    { "title": "Starloom", "category": "Attraction", "description": "Planetarium & space centre — immersive, cosmic theme.", "file": "/sites/starloom-planetarium.html", "accent": "#5b4b8a" },
+    { "title": "Alderose", "category": "Beauty & Spa", "description": "House of beauty & spa — elegant, soft aesthetic.", "file": "/sites/alderose-salon.html", "accent": "#a8577e" },
+    { "title": "Thornmill Coffee", "category": "Café", "description": "Neighbourhood coffee bar with a cozy, tactile look.", "file": "/sites/thornmill-coffee.html", "accent": "#6f4e37" },
+    { "title": "Everden Dental", "category": "Healthcare", "description": "Gentle, modern dentistry — calm and trustworthy.", "file": "/sites/everden-dental.html", "accent": "#2f7a8c" }
+  ]
+}
