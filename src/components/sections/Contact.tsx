@@ -86,7 +86,7 @@ export function Contact() {
             </a>
 
             <div className="mt-3">
-              
+              <a
                 href="mailto:sehrishnusrat1010@gmail.com"
                 className="inline-block font-display text-xl font-semibold text-accent hover:underline"
               >
