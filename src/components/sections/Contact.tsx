@@ -84,6 +84,17 @@ export function Contact() {
             >
               {profile.email}
             </a>
+
+            <div className="mt-3">
+              
+                href="mailto:sehrishnusrat1010@gmail.com"
+                className="inline-block font-display text-xl font-semibold text-accent hover:underline"
+              >
+                sehrishnusrat1010@gmail.com
+              </a>
+              <p className="text-sm text-muted">For new projects &amp; enquiries</p>
+            </div>
+
             <p className="text-sm text-muted">{profile.location}</p>
           </div>
         </Reveal>
