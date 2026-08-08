@@ -47,9 +47,6 @@ export function Hero() {
           <h1 className="mt-6 font-display text-5xl font-semibold leading-[1.05] tracking-tight sm:text-7xl">
             {profile.name}
           </h1>
-	  //<p className="mt-3 text-sm font-medium text-muted">
-            //Design &amp; client partner: Sehrish Nusrat
-          //</p>
 
           <div className="mt-4 flex h-10 items-center text-2xl font-medium sm:text-3xl">
             <AnimatePresence mode="wait">
